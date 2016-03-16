@@ -1,6 +1,6 @@
 {
-  "name": "myapp",
-  "version": "0.0.0",
+  "name": "PicShare-Admin",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -20,5 +20,8 @@
   },
   "backlog": {
       "parse": "~1.7.1"
+  },
+  "engines": {
+    "node": ">=4.3"
   }
 }

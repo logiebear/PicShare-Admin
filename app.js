@@ -12,8 +12,8 @@ var users = require('./routes/users');
 // it must be in front of routes code
 // like app.use("/", routes)
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('picshare:123456@ds013848.mongolab.com:13848/picshare');
+//var monk = require('monk');
+//var db = monk('picshare:123456@ds013848.mongolab.com:13848/picshare');
 
 // parse
 var parse = require('parse/node').Parse;
@@ -38,7 +38,7 @@ app.set('view engine', 'mustache');
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
-    req.db = db;
+    // req.db = db;
     req.parse = parse;
     req.picshare = picshare;
     next();
