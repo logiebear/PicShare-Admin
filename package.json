@@ -15,9 +15,10 @@
     "serve-favicon": "~2.3.0",
     "mongodb": "2.1.7",
     "monk" : "1.0.1",
-    "mustache-express": "1.2.2"
+    "mustache-express": "1.2.2",
+    "parse": "~1.7.1"
   },
   "backlog": {
-      "parse": "~1.6.12"
+      "parse": "~1.7.1"
   }
 }
