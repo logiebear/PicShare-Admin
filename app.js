@@ -24,7 +24,7 @@ parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDt
 //picshare admin tools
 var picshare = require('./picshare-admintool');
 
-//console.log(picshare.test());
+console.log(picshare.searchByEvent());
 
 var app = express();
 
