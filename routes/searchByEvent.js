@@ -17,13 +17,13 @@ router.get('/', function(req, res, next) {
   photoQuery.matchesQuery("event", eventQuery); // get photos for event
 
   photoQuery.find({
-      success: function(results) {
-          res.send(results);
-      },
-      error: function(error) {
-          console.log(error);
-          res.send("Some kind of error occurred: " + error);
-      }
+    success: function(results) {
+      res.send(results);
+    },
+    error: function(error) {
+      console.log(error);
+      res.send("Some kind of error occurred: " + error);
+    }
   });
 });
 
