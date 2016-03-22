@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var searchByEvent = require('./routes/searchByEvent');
 // mongodb code
 // it must be in front of routes code
 // like app.use("/", routes)
@@ -24,7 +24,7 @@ parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDt
 //picshare admin tools
 var picshare = require('./picshare-admintool');
 
-console.log(picshare.searchByEvent());
+//console.log(picshare.searchByEvent());
 
 var app = express();
 
@@ -54,7 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-
+app.use('/searchByEvent', searchByEvent);
 
 
 // catch 404 and forward to error handler
