@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var test = require('./routes/test');
 
 // mongodb code
 // it must be in front of routes code
@@ -14,6 +15,9 @@ var users = require('./routes/users');
 var mongo = require('mongodb');
 //var monk = require('monk');
 //var db = monk('picshare:123456@ds013848.mongolab.com:13848/picshare');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://picshare:123456@ds013848.mongolab.com:13848/picshare');
+
 
 // parse
 var parse = require('parse/node').Parse;
@@ -23,7 +27,8 @@ parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDt
 
 //picshare admin tools
 var picshare = require('./picshare-admintool');
-
+picshare.initialize(mongoose, parse);
+picshare.test();
 //console.log(picshare.test());
 
 var app = express();
@@ -54,6 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/test', test);
 
 
 
