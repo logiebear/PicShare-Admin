@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   // ratings should be 4.5
   //res.render('index', { title: result['result'] });
    data = result;
-   console.log(data);
+   //console.log(data);
    res.render('index', { title: data});
 });
 });

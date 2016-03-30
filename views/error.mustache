@@ -1,8 +1,8 @@
 <html>
     {{>head}}
 <body>
-    <h1>An error has occurred :-(</h1>
-    <p>The error:</p>
-    {{error}}
+  <h1> {{message}} </h1>
+  <h2> {{error.status}} </h2>
+  <p>pre #{error.stack}</p>
 </body>
 </html>
