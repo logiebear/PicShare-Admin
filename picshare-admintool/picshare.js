@@ -1,5 +1,5 @@
 
-var _CoreManager = require('./CoreManager');
+_CoreManager = require('./CoreManager.js');
 
 //var _CoreManager2 = _interopRequireDefault(_CoreManager);
 
@@ -11,8 +11,10 @@ var Picshare = {
   _initialize: function _initialize(database, parse) {
     _CoreManager.setRawDatabase(database);
     _CoreManager.setParse(parse);
+    //console.log(_CoreManager.getParse());
   }
 };
 
 Picshare.test = require("./test.js");
+Picshare.ExpirationManager = require("./ExpirationManager.js");
 module.exports = Picshare;

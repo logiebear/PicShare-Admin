@@ -9,11 +9,11 @@ module.exports = {
   getRawDatabase: function getRawDatabase() {
     return config['RawDatabase'];
   },
-  setParse: function setParse(controller) {
-    config['RawDatabase'] = controller;
+  setParse: function (controller) {
+    config['Parse'] = controller;
   },
 
-  getParse: function getParse() {
-    return config['RawDatabase'];
+  getParse: function () {
+    return config['Parse'];
   }
 };
