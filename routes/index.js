@@ -4,6 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var data="Express";
+  req.picshare.test();
   req.parse.Cloud.run('hello', {}).then(function(result) {
   // ratings should be 4.5
   //res.render('index', { title: result['result'] });

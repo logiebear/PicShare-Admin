@@ -13,4 +13,17 @@ router.get('/log', function(req, res, next) {
   res.send('Complete');
 });
 
+/* Test Expiration */
+router.get('/exp', function(req, res, next) {
+    console.log("Enter Expiration");
+    /* req.parse.Cloud.run('runAllExpiration', {}).then(function(result) {
+      res.send('Result');
+    });
+    */
+    var em = req.picshare.ExpirationManager;
+    console.log(em);
+    em.runAllExpiration();
+    res.send("Test");
+})
+
 module.exports = router;
