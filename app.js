@@ -8,9 +8,8 @@ var passport = require('passport'), LocalStrategy = require('passport-local').St
 var express_session = require('express-session');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var test = require('./routes/test');
-var search = require('./routes/search');
+
 
 // mongodb code
 // it must be in front of routes code
@@ -64,9 +63,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
 app.use('/', routes);
-app.use('/users', users);
-app.use('/test', test);
-app.use('/search', search);
+//app.use('/users', users);
 
 
 
