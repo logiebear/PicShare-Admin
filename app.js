@@ -24,7 +24,7 @@ mongoose.connect('mongodb://picshare:123456@ds013848.mongolab.com:13848/picshare
 
 // parse
 var parse = require('parse/node').Parse;
-parse.serverURL = process.env.PARSE_URL || "http://localhost:1337/parse";
+parse.serverURL = process.env.PARSE_URL || "http://picshare-parse.herokuapp.com";
 parse.Cloud.useMasterKey();
 parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDttZ6euSL");
 
@@ -113,7 +113,7 @@ app.use(passport.session());
 passport.serializeUser(function(user, done) {
   done(null, user._id);
 });
- 
+
 passport.deserializeUser(function(id, done) {
   User.findById(id, function(err, user) {
     done(err, user);
