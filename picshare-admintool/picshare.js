@@ -16,5 +16,7 @@ var Picshare = {
 };
 
 Picshare.test = require("./test.js");
-Picshare.ExpirationManager = require("./ExpirationManager.js");
+Picshare.searchByEvent = require("./searchByEvent.js");
+Picshare.userSearch = require("./searchByUser.js");
+
 module.exports = Picshare;
