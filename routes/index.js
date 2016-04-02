@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
+/*Verify user session*/
+var isAuthenticated = function (req, res, next) {
+	if (req.isAuthenticated())
+		 next();
+	res.redirect('/login');
+}
+
+router.use(isAuthenticated);
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var data="Express";
@@ -28,6 +36,24 @@ router.get('/userlist', function(req, res) {
             "userlist" : docs
         });
     });
+});
+
+/*GET login page*/
+router.get('/login', function(req, res) {
+    res.render('login');
+});
+
+/*POST to login page*/
+router.post('/login', passport.authenticate('local',
+            { successRedirect: '/',
+              failureRedirect: '/login',
+              failureFlash: true }), 
+);
+            
+/*Log out*/
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/login');
 });
 
 module.exports = router;
