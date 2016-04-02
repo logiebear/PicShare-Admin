@@ -16,6 +16,6 @@ var Picshare = {
 
 Picshare.test = require("./test.js");
 Picshare.searchByEvent = require("./searchByEvent.js");
-Picshare.searchByUser = require("./searchByUser.js");
+Picshare.userSearch = require("./searchByUser.js");
 
 module.exports = Picshare;

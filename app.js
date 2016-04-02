@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var test = require('./routes/test');
+var search = require('./routes/search');
 
 // mongodb code
 // it must be in front of routes code
@@ -31,7 +32,7 @@ picshare.initialize(mongoose, parse);
 //picshare.test();
 //console.log(picshare.test());
 //console.log(picshare.searchByEvent());
-picshare.searchByUser("a", console.log);
+picshare.userSearch.searchByUser("a", console.log);
 
 var app = express();
 
@@ -62,6 +63,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/test', test);
+app.use('/search', search);
 
 
 

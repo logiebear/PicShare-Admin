@@ -5,9 +5,12 @@ router.get('/byuser', function(req, res, next) {
     var User = req.parse.Object.extend("User");
     var userQuery = new req.parse.Query(User);
     userQuery.startsWith("username", req.query.user);
+
     var Photo = req.parse.Object.extend("Photo");
     var photoQuery = new req.parse.Query(Photo);
-    photoQuery.matchesKeyInQuery("owner.objectID", "objectID", userQuery);
+
+    photoQuery.matchesQuery("owner", userQuery);
+
     photoQuery.find({
         success: function(results) {
             res.send(results);
