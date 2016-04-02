@@ -3,41 +3,47 @@ var passport = require('passport');
 var router = express.Router();
 
 /*Verify user session*/
-var isAuthenticated = function (req, res, next) {
-	if (req.isAuthenticated())
-		 next();
-	res.redirect('/login');
+var isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated() || req.path == '/login') {
+    return next();
+  }
+  //console.log(req);
+  res.redirect('/login');
 }
 
 router.use(isAuthenticated);
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var data="Express";
+  var data = "Express";
   req.picshare.test();
   req.parse.Cloud.run('hello', {}).then(function(result) {
-  // ratings should be 4.5
-  //res.render('index', { title: result['result'] });
-   data = result;
-   //console.log(data);
-   res.render('index', { title: data});
-});
+    // ratings should be 4.5
+    //res.render('index', { title: result['result'] });
+    data = result;
+    //console.log(data);
+    res.render('index', {
+      title: data
+    });
+  });
 });
 
 /* GET Hello World page. */
 router.get('/helloworld', function(req, res, next) {
-    res.render('helloworld', { title: 'Hello, World!' });
+  res.render('helloworld', {
+    title: 'Hello, World!'
+  });
 });
 
 router.get('/userlist', function(req, res) {
-    var db = req.db;
-    var collection = db.get('_User');
-    console.log(collection);
-    collection.find({},{},function(e,docs){
+  var db = req.db;
+  var collection = db.get('_User');
+  console.log(collection);
+  collection.find({}, {}, function(e, docs) {
     //  console.log(docs);
-        res.render('userlist', {
-            "userlist" : docs
-        });
+    res.render('userlist', {
+      "userlist": docs
     });
+  });
 });
 
 router.use('/login', require('./login.js'));
@@ -47,18 +53,18 @@ router.use('/search', require('./search'));
 
 /*GET login page*/
 router.get('/login', function(req, res) {
-    res.render('login');
+  res.render('login');
 });
 
 /*POST to login page*/
-router.post('/login', passport.authenticate('local',
-            { successRedirect: '/',
-              failureRedirect: '/login',
-              failureFlash: true })
-);
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
 
 /*Log out*/
-router.get('/logout', function(req, res){
+router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/login');
 });
