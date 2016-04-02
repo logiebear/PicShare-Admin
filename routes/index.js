@@ -30,4 +30,8 @@ router.get('/userlist', function(req, res) {
     });
 });
 
+router.use('/login', require('./login.js'));
+router.use('/user', require('./user.js'));
+router.use('/event', require('./event.js'));
+
 module.exports = router;
