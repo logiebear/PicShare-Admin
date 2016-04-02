@@ -28,5 +28,15 @@ router.get('/', function(req, res) {
     res.render('user', data);
 });
 
+router.get('/getAllUsers', function(req, res) {
+	var userSearch = req.picshare.userSearch;
+	console.log(userSearch);
+    data = userSearch.getAllUsers(function(result) {
+    	console.log(result);
+    	console.log("test result");
+    	res.send(result);
+    });
+});
+
 
 module.exports = router;
