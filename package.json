@@ -14,9 +14,12 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "mongodb": "2.1.7",
-    "monk" : "1.0.1",
+    "mongoose" : "4.4.10",
     "mustache-express": "1.2.2",
-    "parse": "~1.7.1"
+    "parse": "~1.7.1",
+    "passport": "latest",
+    "passport-local": "latest",
+    "express-session": "latest"
   },
   "backlog": {
       "parse": "~1.7.1"

@@ -4,9 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+var express_session = require('express-session');
 
 var routes = require('./routes/index');
-//var users = require('./routes/users');
+var users = require('./routes/users');
+var test = require('./routes/test');
+var search = require('./routes/search');
 
 // mongodb code
 // it must be in front of routes code
@@ -14,17 +18,23 @@ var routes = require('./routes/index');
 var mongo = require('mongodb');
 //var monk = require('monk');
 //var db = monk('picshare:123456@ds013848.mongolab.com:13848/picshare');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://picshare:123456@ds013848.mongolab.com:13848/picshare');
+
 
 // parse
 var parse = require('parse/node').Parse;
-parse.serverURL = "http://picshare-parse.herokuapp.com/parse"
+parse.serverURL = process.env.PARSE_URL || "http://picshare-parse.herokuapp.com";
 parse.Cloud.useMasterKey();
 parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDttZ6euSL");
 
 //picshare admin tools
 var picshare = require('./picshare-admintool');
-
+picshare.initialize(mongoose, parse);
+//picshare.test();
 //console.log(picshare.test());
+//console.log(picshare.searchByEvent());
+picshare.userSearch.searchByUser("a", console.log);
 
 var app = express();
 
@@ -38,7 +48,7 @@ app.set('view engine', 'mustache');
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
-    // req.db = db;
+    //req.db = mongoose;
     req.parse = parse;
     req.picshare = picshare;
     next();
@@ -52,6 +62,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//routes
 app.use('/', routes);
 //app.use('/users', users);
 
@@ -88,5 +99,38 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//Set up for user authentication
+app.use(bodyParser());
+app.use(cookieParser());
+app.use(express_session({ secret: 'keyboard cat' }));
+
+//Passport middleware for user authentication
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Username doesn\'t exist.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 module.exports = app;
