@@ -61,6 +61,7 @@ var userSearch = {
                         "hashtag":      results[i].get("hashtag"),
                         "location":     results[i].get("location"),
                         "username":     results[i].get("owner").get("username"),
+                        "created":      results[i].get("createdAt"),
                         "image":        results[i].get("image")
                     }
                     photolist.push(photo);
