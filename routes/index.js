@@ -4,8 +4,7 @@ var router = express.Router();
 
 /*Verify user session*/
 var isAuthenticated = function (req, res, next) {
-	if (req.isAuthenticated())
-		 next();
+	if (req.isAuthenticated() || req.path == '/login') return next();
 	res.redirect('/login');
 }
 
@@ -44,23 +43,5 @@ router.use('/login', require('./login.js'));
 router.use('/user', require('./user.js'));
 router.use('/event', require('./event.js'));
 router.use('/search', require('./search'));
-
-/*GET login page*/
-router.get('/login', function(req, res) {
-    res.render('login');
-});
-
-/*POST to login page*/
-router.post('/login', passport.authenticate('local',
-            { successRedirect: '/',
-              failureRedirect: '/login',
-              failureFlash: true })
-);
-
-/*Log out*/
-router.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/login');
-});
 
 module.exports = router;
