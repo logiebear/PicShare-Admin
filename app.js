@@ -33,14 +33,7 @@ picshare.initialize(mongoose, parse);
 //picshare.test();
 //console.log(picshare.test());
 //console.log(picshare.searchByEvent());
-console.log("List of all users:");
-picshare.userSearch.getAllUsers(console.log);
-console.log("List of usernames starting with \"v\":");
-picshare.userSearch.searchByUser("v", console.log);
-console.log("List of user photos for user \"v\":");
-picshare.userSearch.fetchUserPhotos("v", console.log);
-console.log("List of user photos for user \"vincent\":");
-picshare.userSearch.fetchUserPhotos("vincent", console.log);
+//picshare.userSearch.searchByUser("a", console.log);
 
 var app = express();
 

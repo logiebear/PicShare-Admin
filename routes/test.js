@@ -21,8 +21,11 @@ router.get('/exp', function(req, res, next) {
     });
     */
     var em = req.picshare.ExpirationManager;
+    console.log("Expiration Test Start");
     console.log(em);
-    em.runAllExpiration();
+    em.runAllExpirationEvent();
+    em.runAllExpirationPhoto();
+    em.setExpirationPeriodByDay(1);
     res.send("Test");
 })
 
