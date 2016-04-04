@@ -27,10 +27,8 @@ router.get('/searchByUser', function(req, res) {
 });
 
 router.get('/fetchUserPhotos', function(req, res) {
-	console.log("userjs");
 	var userSearch = req.picshare.userSearch;
     userSearch.fetchUserPhotos(req.param("user"), function(result) {
-    	console.log(result);
     	for(var i = 0; i < result.length; ++i) {
     		result[i].image = result[i].image.url();
     	}

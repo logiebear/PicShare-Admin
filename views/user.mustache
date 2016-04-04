@@ -13,11 +13,14 @@
 
 	<!-- JavaScript -->
 
-	<script type="text/javascript" src="javascripts/myfunc.js"></script>
+	<script type="text/javascript" src="javascripts/delete.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 
-
+	<!-- jQuery -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
 		function showAllUsers() {
 			$.ajax({
@@ -121,8 +124,8 @@
 
 <body>
 	<div class="changePattern">
-		<span class="delete"><a href="#" style="color: white">Delete</a></span>
-		<span class="cancel"><a href="#" style="color: white">Cancel</a></span>
+		<span class="delete" id="deleteButton"><a style="color: white">Delete</a></span>
+		<span class="cancel" onclick = "cancel()"><a style="color: white">Cancel</a></span>
 	</div>
 	
 	<div class="top_panel">
@@ -136,6 +139,11 @@
 					<li>
 						<a href="#" title="Logout">
 							<span class="label">Logout</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" title="Expire">
+							<span class="label">Set Expiration Period</span>
 						</a>
 					</li>
 				</ul>
@@ -158,13 +166,13 @@
 		<aside class="sidebar">
 			<ul class="tab_nav">
 				<li class="active_tab i_32_ui">
-					<a href="#" title="Photos by user">
+					<a href="" title="Photos by user">
 						<span class="tab_label">USER</span>
 						<span class="tab_info">Photos by user</span>
 					</a>
 				</li>
 				<li class="i_32_dashboard">
-					<a href="#" title="Photos by event">
+					<a href="/event" title="Photos by event">
 						<span class="tab_label">EVENT</span>
 						<span class="tab_info">Photos by event</span>
 					</a>
@@ -219,6 +227,24 @@
 			</span>
 		</div>
 	</footer>
+
+	<script>
+		var x = "Are you sure to delete?";
+		$('#deleteButton').click(function() {
+		    $('<div>' + x + '</div>').dialog({
+		        resizable: false,
+		        buttons: {
+		            "Yes": function() {
+		            	picDelete();
+		                $(this).dialog("close");
+		            },
+		            Cancel: function() {
+		                $(this).dialog("close"); //close confirmation
+		            }
+		        }
+		    });
+		});
+	</script>
 
 </body>
 </html>
