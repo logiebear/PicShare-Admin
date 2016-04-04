@@ -59,5 +59,14 @@ router.get('/getEvents', function(req, res,next){
     });
 });
 
+router.get('/deletePhoto', function(req, res,next){
+    var pic = req.picshare.delete
+    console.log("Delete Photo");
+    pic.deletePhoto(function(result){
+      console.log("Photo Deleted");
+      //console.log(result);
+      //res.send(result);
+    });
+});
 
 module.exports = router;
