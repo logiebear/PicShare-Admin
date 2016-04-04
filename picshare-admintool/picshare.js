@@ -15,6 +15,15 @@ var Picshare = {
     var passport = require('passport');
     var initPassport = require('./passport/init');
     initPassport(passport);
+    /*
+    var signup = require('./passport/signup');
+    signup({username : "admin", password : "admin"});
+    /*
+    signup({username : 'a', passowrd : 'a'});
+    signup({username : 'b', passowrd : 'b'});
+    signup({username : 'c', passowrd : 'c'});
+    */
+
   },
   setExpirationSchedule : function() {
     this.ExpirationManager.setExpirationSchedule();
