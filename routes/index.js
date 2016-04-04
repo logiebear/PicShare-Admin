@@ -52,5 +52,6 @@ router.use('/login', require('./login.js'));
 router.use('/user', require('./user.js'));
 router.use('/event', require('./event.js'));
 router.use('/search', require('./search'));
+router.use('/delete', require('./delete'));
 
 module.exports = router;
