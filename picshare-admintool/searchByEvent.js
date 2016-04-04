@@ -45,6 +45,7 @@ var eventSearch = {
          var Photo = parse.Object.extend("Photo");
          var photoQuery = new parse.Query(Photo);
          photoQuery.include("owner");
+         photoQuery.include("event");
 
          // Find photos whose event object matches the events returned form previous query
          // (Basically a join on objectID)
@@ -98,7 +99,7 @@ var eventSearch = {
                  var eventlist = [];
                  for (var i = 0; i < results.length; i++) {
                      var event = {
-                         "event":     results[i].get("hashtag")
+                         "hashtag":     results[i].get("hashtag")
                      };
                     eventlist.push(event);
                 }
