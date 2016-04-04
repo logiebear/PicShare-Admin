@@ -1,5 +1,0 @@
-{{#events}}
-	<div class="line_grid">
-		<div class="g_3"><a href="#"><span class="label">{{hashtag}}</span></a></div>
-	</div>
-{{/events}}
