@@ -36,7 +36,7 @@ var userSearch = {
         var parse = _CoreManager.getParse();
 
         // Build the user portion of the query
-        var User = parse.Object.extend("User");
+        var User = parse.User.extend();
         var userQuery = new parse.Query(User);
         userQuery.equalTo("username", user);
 
@@ -81,7 +81,7 @@ var userSearch = {
         var parse = _CoreManager.getParse();
 
         // Build the query
-        var User = parse.Object.extend("User");
+        var User = parse.User.extend();
         var userQuery = new parse.Query(User);
 
         // Perform the query
