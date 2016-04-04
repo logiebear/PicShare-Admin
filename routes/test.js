@@ -69,7 +69,7 @@ router.get('/deletePhoto', function(req, res,next){
       success: function(){
       console.log("Photo Deleted");
       //console.log(result);
-      res.send("Photo delete");
+      res.send("Photo deleted");
     },
       error: function(err) {
         res.send(err);
@@ -77,4 +77,40 @@ router.get('/deletePhoto', function(req, res,next){
   ;
 });
 
+
+router.get('/deleteEvent', function(req, res,next){
+    var pic = req.picshare.DeleteManager
+    console.log("Delete Event");
+    console.log(pic);
+    console.log(pic.deleteEvent);
+
+    pic.deleteEvent("yW2EfhIVBk", {
+      success: function(){
+      console.log("Event Deleted");
+      //console.log(result);
+      res.send("Event deleted");
+    },
+      error: function(err) {
+        res.send(err);
+      }})
+  ;
+});
+
+router.get('/deleteUser', function(req, res,next){
+    var pic = req.picshare.DeleteManager
+    console.log("Delete User");
+    console.log(pic);
+    console.log(pic.deleteUser);
+
+    pic.deleteUser("uKSB9kNRII", {
+      success: function(){
+      console.log("User Deleted");
+      //console.log(result);
+      res.send("User deleted");
+    },
+      error: function(err) {
+        res.send(err);
+      }})
+  ;
+});
 module.exports = router;
