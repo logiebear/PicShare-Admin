@@ -20,7 +20,8 @@
     "passport": "latest",
     "passport-local": "latest",
     "express-session": "latest",
-    "req-flash": "latest"
+    "req-flash": "latest",
+    "connect-flash" : "latest"
   },
   "backlog": {
       "parse": "~1.7.1"
