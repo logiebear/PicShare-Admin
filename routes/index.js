@@ -28,6 +28,12 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* Logout */
+router.use('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/login');
+});
+
 /* GET Hello World page. */
 router.get('/helloworld', function(req, res, next) {
   res.render('helloworld', {
