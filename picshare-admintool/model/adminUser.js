@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var UserInfo = new Schema({
       username: String,
-      password: String
+      password: String,
+      email: String,
     }, {
       collection: 'AdminUser'
     });
