@@ -3,6 +3,11 @@ var passport = require('passport');
 var router = express.Router();
 
 /*Verify user session*/
+<<<<<<< HEAD
+var isAuthenticated = function (req, res, next) {
+	if (req.isAuthenticated() || req.path == '/login') return next();
+	res.redirect('/login');
+=======
 var isAuthenticated = function(req, res, next) {
   return next();
   if (req.isAuthenticated() || req.path == '/login') {
@@ -10,6 +15,7 @@ var isAuthenticated = function(req, res, next) {
   }
   //console.log(req);
   res.redirect('/login');
+>>>>>>> dev
 }
 
 router.use(isAuthenticated);
@@ -53,6 +59,8 @@ router.use('/user', require('./user.js'));
 router.use('/event', require('./event.js'));
 router.use('/search', require('./search'));
 
+<<<<<<< HEAD
+=======
 /*GET login page*/
 router.get('/login', function(req, res) {
   res.render('login');
@@ -71,4 +79,5 @@ router.get('/logout', function(req, res) {
   res.redirect('/login');
 });
 
+>>>>>>> dev
 module.exports = router;

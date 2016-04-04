@@ -12,6 +12,9 @@ var Picshare = {
     _CoreManager.setRawDatabase(database);
     _CoreManager.setParse(parse);
     //console.log(_CoreManager.getParse());
+    var passport = require('passport');
+    var initPassport = require('./passport/init');
+    initPassport(passport);
   }
 };
 
