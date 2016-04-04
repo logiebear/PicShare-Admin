@@ -1,0 +1,13 @@
+{{#photos}}
+	<div class="portfolio-group">
+		<a class="portfolio-item" id = "{{photoID}}" onclick = "select('{{photoID}}'')" >
+			<img src = "{{image}}" alt="ERROR">
+			<div class="detail">
+				<h4> {{description}} </h4>
+				<p>&nbsp Owner: {{username}} </p>
+				<p>&nbsp EventID: {{hashtag}} </p>
+				<p>&nbsp UploadDate: {{uploadDate}} </p>
+			</div>
+		</a>				
+	</div>
+{{/photos}}	
