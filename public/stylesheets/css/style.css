@@ -2378,3 +2378,53 @@
 		border-radius: 3px;
 		cursor: pointer;
 	}
+
+
+	.confirmPattern {
+		display: none;
+		width: 2in;
+		height: auto;
+		border-radius: 0 3px 3px 0;
+		background-color: rgba(100, 100, 100, 0.1);
+		position: fixed;
+		top: 340px;
+		left: 0in;
+		padding-top: 6px;
+		z-index: 1000;
+	}
+
+	.confirmPattern span.confirmYes {
+		font-family: Droid Sans;
+		color: #ffffff;
+		font-size: 20px;
+		text-shadow: 0 0px 0 #FFFFFF;
+		text-align: center;
+		vertical-align: center;
+		background-color: rgba(70, 70, 70, 0.1);
+		display: inline-block;
+		margin-left: 20px;
+		margin-right: 0;
+		margin-bottom: 3px;
+		width: 0.77in;
+		height: 25px;
+		border-radius: 3px;
+		cursor: pointer;
+	}
+
+	.confirmPattern span.confirmNo {
+		font-family: Droid Sans;
+		color: #ffffff;
+		font-size: 20px;
+		text-shadow: 0 0px 0 #FFFFFF;
+		text-align: center;
+		vertical-align: center;
+		background-color: rgba(70, 70, 70, 0.1);
+		display: inline-block;
+		margin-left: 0px;
+		margin-right: 0;
+		margin-bottom: 3px;
+		width: 0.77in;
+		height: 25px;
+		border-radius: 3px;
+		cursor: pointer;
+	}

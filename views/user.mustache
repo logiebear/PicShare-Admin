@@ -17,10 +17,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 
-	<!-- jQuery -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
 		function showAllUsers() {
 			$.ajax({
@@ -123,8 +119,13 @@
 </head>
 
 <body>
+	<div class="confirmPattern" id = "confirmBlock">
+		<p style="margin-left: 25px">Do you want to delete?</p>
+		<span class = "confirmYes" onclick = "picDelete()"><a style="color: red">Yes</a></span>
+		<span class = "confirmNo" onclick = "notDelete()"><a style="color: #33CC33">No</a></span>
+	</div>
 	<div class="changePattern">
-		<span class="delete" id="deleteButton"><a style="color: white">Delete</a></span>
+		<span class="delete" onclick = "deleteConfirm()"><a style="color: white">Delete</a></span>
 		<span class="cancel" onclick = "cancel()"><a style="color: white">Cancel</a></span>
 	</div>
 	
@@ -137,13 +138,8 @@
 			<div class="top_links">
 				<ul>
 					<li>
-						<a href="#" title="Logout">
+						<a href="/logout" title="Logout">
 							<span class="label">Logout</span>
-						</a>
-					</li>
-					<li>
-						<a href="#" title="Expire">
-							<span class="label">Set Expiration Period</span>
 						</a>
 					</li>
 				</ul>
@@ -227,24 +223,6 @@
 			</span>
 		</div>
 	</footer>
-
-	<script>
-		var x = "Are you sure to delete?";
-		$('#deleteButton').click(function() {
-		    $('<div>' + x + '</div>').dialog({
-		        resizable: false,
-		        buttons: {
-		            "Yes": function() {
-		            	picDelete();
-		                $(this).dialog("close");
-		            },
-		            Cancel: function() {
-		                $(this).dialog("close"); //close confirmation
-		            }
-		        }
-		    });
-		});
-	</script>
 
 </body>
 </html>

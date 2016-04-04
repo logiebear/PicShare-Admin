@@ -25,11 +25,20 @@ function objectDelete(postData) {
   		} else {
 
   		}
-}, "json");
+	}, "json");
 }
 
 function picDelete() {
 	for(var i = 0; i < deleteList.length; ++i) {
 		photoDelete(deleteList[i]);
 	}
+	document.getElementById("confirmBlock").style.display = "none";
+}
+
+function notDelete(){
+	document.getElementById("confirmBlock").style.display = "none";
+}
+
+function deleteConfirm(){
+	document.getElementById("confirmBlock").style.display = "block";
 }
