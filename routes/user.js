@@ -31,6 +31,9 @@ router.get('/fetchUserPhotos', function(req, res) {
 	var userSearch = req.picshare.userSearch;
     userSearch.fetchUserPhotos(req.param("user"), function(result) {
     	console.log(result);
+    	for(var i = 0; i < result.length; ++i) {
+    		result[i].image = result[i].image.url();
+    	}
     	res.send(result);
     });
 });

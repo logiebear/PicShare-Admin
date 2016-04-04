@@ -17,28 +17,100 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 
+
 	<script>
-		function showAllUsers() {
+		function showAllEvents() {
 			$.ajax({
 				url: "/event/getAllEvents",
-				success: function( data ) {
-
-					console.log(data);
+				success: function (data) {
 					var data_event = {"events":[]};
 					for(var i = 0; i < data.length; ++i) {
 						data_event.events.push({
-							"hashtag": data[i].hashtag   //the name could be different !!!!!!!!!!!!!!!!!!!!!!!!
+							"eventname": data[i].eventname
 						});
 					}
-					console.log("start");
 					$.get("/templates/eventTmpl.html", function (template) {
-						//alert("got it");
-						//console.log(template);
 						var tmpl_event = template;
 						var html_event = Mustache.to_html(tmpl_event, data_event);
-						//console.log(data_event);
 						var eventList = document.getElementById("eventList");
-						//console.log(html_event);
+						eventList.innerHTML = html_event;
+					});
+
+					var data_photo = {"photos":[]};
+					$.get("/templates/photoTmpl.html", function (template) {
+						var tmpl_photo = template;
+						var html_photo = Mustache.to_html(tmpl_photo, data_photo);
+						var photoList = document.getElementById("photoList");
+						photoList.innerHTML = html_photo;
+					});
+			  	}
+			});
+		}
+
+		function searchByUser() {
+			searchTerm = document.getElementById("searchTerm").value;
+			if(searchTerm == ""){
+				return;
+			}
+			$.ajax({
+				url: "/event/searchByUser",
+				data: {search: searchTerm},
+				success: function(data) {
+					var data_event = {"events":[]};
+					for(var i = 0; i < data.length; ++i) {
+						data_event.events.push({
+							"eventname": data[i].eventname
+						});
+					}
+					$.get("/templates/eventTmpl.html", function (template) {
+						var tmpl_event = template;
+						var html_event = Mustache.to_html(tmpl_event, data_event);
+						var eventList = document.getElementById("eventList");
+						eventList.innerHTML = html_event;
+					});
+
+					var data_photo = {"photos":[]};
+					$.get("/templates/photoTmpl.html", function (template) {
+						var tmpl_photo = template;
+						var html_photo = Mustache.to_html(tmpl_photo, data_photo);
+						var photoList = document.getElementById("photoList");
+						photoList.innerHTML = html_photo;
+					});
+			  	}
+			});
+		}
+
+		function getPhotos(eventname) {
+			$.ajax({
+				url: "/event/fetchUserPhotos",
+				data: {event: eventname},
+				success: function(data) {
+					var data_photo = {"photos":[]};
+					for(var i = 0; i < data.length; ++i) {
+						data_photo.photos.push({
+							"photoID":      data[i].objectID,
+							"description":  data[i].description,
+							"image":        data[i].image,
+							"username":     data[i].username,
+							"hashtag":      data[i].hashtag,
+							"uploadDate":   data[i].created
+						});
+					}
+					$.get("/templates/photoTmpl.html", function (template) {
+						var tmpl_photo = template;
+						var html_photo = Mustache.to_html(tmpl_photo, data_photo);
+						var photoList = document.getElementById("photoList");
+						photoList.innerHTML = html_photo;
+					});
+
+					var data_event = {"events":[]};
+					data_event.events.push({
+						"eventname": eventname
+					});
+					$.get("/templates/eventTmpl.html", function (template) {
+						var tmpl_event = template;
+						var html_event = Mustache.to_html(tmpl_event, data_event);
+						var eventList = document.getElementById("eventList");
 						eventList.innerHTML = html_event;
 					});
 			  	}
@@ -107,27 +179,20 @@
 					<div><span class="label">Delete photos by event</span></div>
 				</div>
 				<div class="g_6 contents_options">
-					<div class="simple_buttons" onclick="showAllEvents()">
+					<div class="simple_buttons" onclick = "showAllEvents()">
 						<div>Show All</div>
 					</div>
-					<form> <!-- search here -->
-						<div class="simple_buttons">
-							<img src="images/Icons/22/i_22_search.png"/>
-						</div>
-						<input type="text" class="simple_input"/>
-					</form>
+					<div class="simple_buttons" onclick = "searchByEvent()">
+						<img src="images/Icons/22/i_22_search.png"/>
+					</div>
+					<input type="text" class="simple_input" id="searchTerm"/>
 				</div>
 				<div class="g_12">
 					<div class="widget_header">
 						<h4 class="widget_header_title wwIcon i_16_tabs">List of Events</h4>
 					</div>
 					<div class="widget_contents noPadding" id="eventList">
-						{{#events}}
-							<div class="line_grid">
-								<div class="g_3"><a href="#"><span class="label">{{hashtag}}</span></a></div>
-							</div>
-						{{/events}}
-
+						<!--  event list here  -->
 					</div>
 				</div>
 				<div class="g_12">
@@ -138,19 +203,7 @@
 						<div class="main-container">
 							<div class="portfolio-content">
 								<div class="portfolio-page" id="photoList">
-									{{#photos}}
-										<div class="portfolio-group">
-											<a class="portfolio-item" id = {{photoID}} onclick = {{onclick}} >
-												<img src = {{src}} alt="ERROR">
-												<div class="detail">
-													<h4> {{photoID}} </h4>
-													<p>&nbsp Owner: {{photoUsr}} </p>
-													<p>&nbsp EventID: {{hashtag}} </p>
-													<p>&nbsp UploadDate: {{uploadDate}} </p>
-												</div>
-											</a>				
-										</div>
-									{{/photos}}								
+									<!--  photo list here  -->	
 								</div> 
 							</div>
 						</div>	
@@ -159,7 +212,6 @@
 			</div>
 		</div>
 	</div>
-	
 	<footer>
 		<div class="wrapper">
 			<span class="copyright">
