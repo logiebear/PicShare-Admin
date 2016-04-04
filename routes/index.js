@@ -4,7 +4,7 @@ var router = express.Router();
 
 /*Verify user session*/
 var isAuthenticated = function(req, res, next) {
-  //return next();
+  return next();
   if (req.isAuthenticated() || req.path == '/login') {
     return next();
   }
