@@ -12,7 +12,6 @@ function cancel(){
 	deleteList.length = 0;
 }
 
-
 function photoDelete(photoId){
 	var postData = { photoId : photoId, type : "photo" };
 	objectDelete(postData);
