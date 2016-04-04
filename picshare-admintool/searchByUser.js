@@ -6,7 +6,7 @@ var userSearch = {
         var parse = _CoreManager.getParse();
 
         // Build the query
-        var User = parse.Object.extend("User");
+        var User = parse.User.extend();
         var userQuery = new parse.Query(User);
         userQuery.startsWith("username", user);
 
@@ -18,7 +18,7 @@ var userSearch = {
                 var userlist = [];
                 for (var i = 0; i < results.length; i++) {
                     var user = {
-                        "username":     results[i].get("username")
+                        "username":     results[i].getUsername()
                     };
                     userlist.push(user);
                 }
@@ -44,6 +44,7 @@ var userSearch = {
         var Photo = parse.Object.extend("Photo");
         var photoQuery = new parse.Query(Photo);
         photoQuery.include("owner");
+        photoQuery.include("event");
 
         // Find photos whose owner object matches the users returned form previous query
         // (Basically a join on objectID)
@@ -59,9 +60,9 @@ var userSearch = {
                     var photo = {
                         "objectID":     results[i].id,
                         "description":  results[i].get("descriptiveText"),
-                        "hashtag":      results[i].get("hashtag"),
+                        "hashtag":      results[i].get("event").get("hashtag"),
                         "location":     results[i].get("location"),
-                        "username":     results[i].get("owner").get("username"),
+                        "username":     results[i].get("owner").getUsername(),
                         "created":      results[i].get("createdAt"),
                         "image":        results[i].get("image")
                     }
