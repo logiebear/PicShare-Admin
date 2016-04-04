@@ -13,13 +13,15 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "mongodb": "2.1.7",
+    "mongodb": "2.1.14",
     "mongoose" : "4.4.10",
     "mustache-express": "1.2.2",
-    "parse": "~1.7.1",
+    "parse": "~1.8.1",
     "passport": "latest",
     "passport-local": "latest",
-    "express-session": "latest"
+    "express-session": "latest",
+    "req-flash": "latest",
+    "connect-flash" : "latest"
   },
   "backlog": {
       "parse": "~1.7.1"

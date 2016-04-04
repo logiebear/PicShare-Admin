@@ -12,11 +12,16 @@ var Picshare = {
     _CoreManager.setRawDatabase(database);
     _CoreManager.setParse(parse);
     //console.log(_CoreManager.getParse());
+    var passport = require('passport');
+    var initPassport = require('./passport/init');
+    initPassport(passport);
   }
 };
 
 Picshare.test = require("./test.js");
-Picshare.searchByEvent = require("./searchByEvent.js");
+Picshare.eventSearch = require("./searchByEvent.js");
 Picshare.userSearch = require("./searchByUser.js");
+Picshare.ExpirationManager = require("./ExpirationManager.js");
+
 
 module.exports = Picshare;
