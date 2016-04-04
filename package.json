@@ -19,9 +19,14 @@
     "parse": "~1.7.1",
     "passport": "latest",
     "passport-local": "latest",
+<<<<<<< HEAD
     "express-session": "latest",
     "req-flash": "latest",
     "connect-flash" : "latest"
+=======
+    "express-session": "latest", 
+    "node-schedule" : "~1.1.0"
+>>>>>>> feature/Expiration
   },
   "backlog": {
       "parse": "~1.7.1"
