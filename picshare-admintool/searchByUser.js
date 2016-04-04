@@ -4,12 +4,12 @@ var userSearch = {
     // Accepts a user string and a callback function from the caller
     searchByUser: function searchByUser(user, callback) {
         var parse = _CoreManager.getParse();
-    
+
         // Build the query
         var User = parse.Object.extend("User");
         var userQuery = new parse.Query(User);
         userQuery.startsWith("username", user);
-        
+
         // Perform the query
         userQuery.find({
             success: function(results) {
@@ -34,17 +34,17 @@ var userSearch = {
     // Accepts a user string and a callback function from the caller
     fetchUserPhotos: function fetchUserPhotos(user, callback) {
         var parse = _CoreManager.getParse();
-    
+
         // Build the user portion of the query
         var User = parse.Object.extend("User");
         var userQuery = new parse.Query(User);
         userQuery.equalTo("username", user);
-    
+
         // Build the photo portion of the query
         var Photo = parse.Object.extend("Photo");
         var photoQuery = new parse.Query(Photo);
         photoQuery.include("owner");
-    
+
         // Find photos whose owner object matches the users returned form previous query
         // (Basically a join on objectID)
         photoQuery.matchesQuery("owner", userQuery);
@@ -75,15 +75,15 @@ var userSearch = {
             }
         });
     },
-    
+
     // Accepts a callback string from the caller, returning all user objects
     getAllUsers: function getAllUsers(callback) {
         var parse = _CoreManager.getParse();
-    
+
         // Build the query
         var User = parse.Object.extend("User");
         var userQuery = new parse.Query(User);
-        
+
         // Perform the query
         userQuery.find({
             success: function(results) {

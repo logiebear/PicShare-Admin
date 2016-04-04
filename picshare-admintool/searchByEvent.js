@@ -44,7 +44,7 @@ var eventSearch = {
          // Build the photo portion of the query
          var Photo = parse.Object.extend("Photo");
          var photoQuery = new parse.Query(Photo);
-         photoQuery.include("event");
+         photoQuery.include("owner");
 
          // Find photos whose event object matches the events returned form previous query
          // (Basically a join on objectID)
@@ -57,12 +57,17 @@ var eventSearch = {
                  // return the JSON using the provided callback
                  var photolist = [];
                  for (var i = 0; i < results.length; i++) {
+                   var user = results[i].get("owner");
+                    console.log(results[i].attributes);
+                    console.log(results[i].get("owner"));
+                    console.log(Object.getOwnPropertyNames(user));
+                    console.log(user.attributes);
                      var photo = {
                          "objectID":     results[i].id,
                          "description":  results[i].get("descriptiveText"),
-                         "hashtag":      results[i].get("hashtag"),
+                         "hashtag":      results[i].get("event").get("hashtag"),
                          "location":     results[i].get("location"),
-                         "username":     results[i].get("owner").get("username"),
+                         "username":     results[i].get("owner").getUsername(),
                          "created":      results[i].get("createdAt"),
                          "image":        results[i].get("image")
                      }

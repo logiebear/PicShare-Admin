@@ -32,11 +32,32 @@ router.get('/exp', function(req, res, next) {
 router.get('/searchEvent', function(req, res, next) {
   var pic = req.picshare.eventSearch;
   console.log("Start search event");
-  pic.searchByEvent("a", function(result) {
+  pic.searchByEvent("Library", function(result) {
     console.log("Search Event Reuslt");
     console.log(result);
     res.send(result);
   });
 });
+
+router.get('/fetchEvent', function(req, res, next){
+  var pic = req.picshare.eventSearch
+  console.log("Start fetch event photos");
+  pic.fetchEventPhotos("Library", function(result){
+    console.log("Fetch Event Photos Result");
+    console.log(result);
+    res.send(result);
+  });
+});
+
+router.get('/getEvents', function(req, res,next){
+    var pic = req.picshare.eventSearch
+    console.log("Start get all events");
+    pic.getAllEvents(function(result){
+      console.log("Get All Events");
+      console.log(result);
+      res.send(result);
+    });
+});
+
 
 module.exports = router;
