@@ -1,15 +1,44 @@
 var _CoreManager = require('./CoreManager');
 
 var userSearch = {
-
     // Accepts a user string and a callback function from the caller
     searchByUser: function searchByUser(user, callback) {
+        var parse = _CoreManager.getParse();
+    
+        // Build the query
+        var User = parse.Object.extend("User");
+        var userQuery = new parse.Query(User);
+        userQuery.startsWith("username", user);
+        
+        // Perform the query
+        userQuery.find({
+            success: function(results) {
+                // If successful, capture the results in JSON format and
+                // return the JSON using the provided callback
+                var userlist = [];
+                for (var i = 0; i < results.length; i++) {
+                    var user = {
+                        "username":     results[i].get("username")
+                    };
+                    userlist.push(user);
+                }
+                callback(userlist);
+            },
+            error: function(error) {
+                // Otherwise, log the error
+                console.log(error);
+            }
+        });
+    },
+
+    // Accepts a user string and a callback function from the caller
+    fetchUserPhotos: function fetchUserPhotos(user, callback) {
         var parse = _CoreManager.getParse();
     
         // Build the user portion of the query
         var User = parse.Object.extend("User");
         var userQuery = new parse.Query(User);
-        userQuery.startsWith("username", user);
+        userQuery.equalTo("username", user);
     
         // Build the photo portion of the query
         var Photo = parse.Object.extend("Photo");
@@ -28,10 +57,12 @@ var userSearch = {
                 var photolist = [];
                 for (var i = 0; i < results.length; i++) {
                     var photo = {
+                        "objectID":     results[i].id,
                         "description":  results[i].get("descriptiveText"),
                         "hashtag":      results[i].get("hashtag"),
                         "location":     results[i].get("location"),
                         "username":     results[i].get("owner").get("username"),
+                        "created":      results[i].get("createdAt"),
                         "image":        results[i].get("image")
                     }
                     photolist.push(photo);
@@ -61,9 +92,7 @@ var userSearch = {
                 var userlist = [];
                 for (var i = 0; i < results.length; i++) {
                     var user = {
-                        "username":     results[i].get("username"),
-                        "email":        results[i].get("email"),
-                        "profilePhoto": results[i].get("profilePhoto")
+                        "username":     results[i].get("username")
                     };
                     userlist.push(user);
                 }
