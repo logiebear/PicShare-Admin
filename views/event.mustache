@@ -26,7 +26,7 @@
 					var data_event = {"events":[]};
 					for(var i = 0; i < data.length; ++i) {
 						data_event.events.push({
-							"eventname": data[i].eventname
+							"hashtag": data[i].hashtag
 						});
 					}
 					$.get("/templates/eventTmpl.html", function (template) {
@@ -47,19 +47,19 @@
 			});
 		}
 
-		function searchByUser() {
+		function searchByEvent() {
 			searchTerm = document.getElementById("searchTerm").value;
 			if(searchTerm == ""){
 				return;
 			}
 			$.ajax({
-				url: "/event/searchByUser",
+				url: "/event/searchByEvent",
 				data: {search: searchTerm},
 				success: function(data) {
 					var data_event = {"events":[]};
 					for(var i = 0; i < data.length; ++i) {
 						data_event.events.push({
-							"eventname": data[i].eventname
+							"hashtag": data[i].hashtag
 						});
 					}
 					$.get("/templates/eventTmpl.html", function (template) {
@@ -80,10 +80,10 @@
 			});
 		}
 
-		function getPhotos(eventname) {
+		function getPhotos(hashtag) {
 			$.ajax({
-				url: "/event/fetchUserPhotos",
-				data: {event: eventname},
+				url: "/event/fetchEventPhotos",
+				data: {event: hashtag},
 				success: function(data) {
 					var data_photo = {"photos":[]};
 					for(var i = 0; i < data.length; ++i) {
@@ -105,7 +105,7 @@
 
 					var data_event = {"events":[]};
 					data_event.events.push({
-						"eventname": eventname
+						"hashtag": hashtag
 					});
 					$.get("/templates/eventTmpl.html", function (template) {
 						var tmpl_event = template;
