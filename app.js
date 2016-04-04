@@ -24,7 +24,7 @@ mongoose.connect('mongodb://picshare:123456@ds013848.mongolab.com:13848/picshare
 
 // parse
 var parse = require('parse/node').Parse;
-parse.serverURL = process.env.PARSE_URL || "http://picshare-parse.herokuapp.com";
+parse.serverURL = process.env.PARSE_URL || "http://picshare-parse.herokuapp.com/parse";
 parse.Cloud.useMasterKey();
 parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDttZ6euSL");
 
@@ -34,7 +34,7 @@ picshare.initialize(mongoose, parse);
 //picshare.test();
 //console.log(picshare.test());
 //console.log(picshare.searchByEvent());
-picshare.userSearch.searchByUser("a", console.log);
+//picshare.userSearch.searchByUser("a", console.log);
 
 var app = express();
 
