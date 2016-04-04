@@ -56,16 +56,24 @@ var userSearch = {
                 // If successful, capture the results in JSON format and
                 // return the JSON using the provided callback
                 var photolist = [];
+                console.log("start fetch photo");
+                console.log(results.length)
                 for (var i = 0; i < results.length; i++) {
+                    console.log(results[i]);
+                    var hashtag = "Location photo";
+                    if(results[i].get("event")) {
+                        hashtag = results[i].get("event").get("hashtag");
+                    }
                     var photo = {
                         "objectID":     results[i].id,
                         "description":  results[i].get("descriptiveText"),
-                        "hashtag":      results[i].get("event").get("hashtag"),
+                        "hashtag":      hashtag,
                         "location":     results[i].get("location"),
                         "username":     results[i].get("owner").getUsername(),
                         "created":      results[i].get("createdAt"),
                         "image":        results[i].get("image")
                     }
+                    //console.log(photo);
                     photolist.push(photo);
                 }
                 callback(photolist);

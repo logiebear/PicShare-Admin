@@ -58,7 +58,7 @@ var eventSearch = {
                  // return the JSON using the provided callback
                  var photolist = [];
                  for (var i = 0; i < results.length; i++) {
-                   var user = results[i].get("owner");
+                    var user = results[i].get("owner");
                     console.log(results[i].attributes);
                     console.log(results[i].get("owner"));
                     console.log(Object.getOwnPropertyNames(user));
