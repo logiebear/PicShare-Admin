@@ -1,5 +1,5 @@
 var _CoreManager = require('./CoreManager');
-
+var schedule = require('node-schedule');
 
 function runAllExpiration(parseObject) {
   //Parse.Cloud.useMasterKey();
@@ -20,7 +20,7 @@ function runAllExpiration(parseObject) {
       var date = new Date(photo.updatedAt);
       console.log(photo);
       console.log("Photo Id: " + photo.id + " " + photo.updatedAt + "; today: " + today.toString());
-      console.log((today.getTime() -date.getTime())+ " " + config.ExpirationPeriod);
+      console.log((today.getTime() - date.getTime()) + " " + config.ExpirationPeriod);
       if (today.getTime() - date.getTime() > config.ExpirationPeriod) {
         console.log("Photo should be deleted");
         photo.destroy({
@@ -38,19 +38,32 @@ function runAllExpiration(parseObject) {
 }
 
 var config = {
-  ExpirationPeriod : (7 * 24 * 60 * 60 * 1000)
+  ExpirationPeriod: (7 * 24 * 60 * 60 * 1000)
 };
 
 module.exports = {
-  runAllExpirationPhoto : function() {
+  runAllExpirationPhoto: function() {
     console.log("Expire photo");
     runAllExpiration("Photo");
   },
-  runAllExpirationEvent : function() {
+  runAllExpirationEvent: function() {
     console.log("Expire event");
     runAllExpiration("Event");
   },
-  setExpirationPeriodByDay(days) {
+  setExpirationPeriodByDay: function(days) {
     config.ExpirationPeriod = days * 24 * 60 * 60 * 1000;
+  },
+  setExpirationSchedule: function() {
+    var ExpManager = this;
+    var j = schedule.scheduleJob({
+      hour: 20,
+      minute: 7,
+      dayOfWeek: new schedule.Range(0, 6)
+    }, function() {
+      console.log('Time for tea! and clean Expiration');
+      ExpManager.runAllExpirationEvent();
+      ExpManager.runAllExpirationPhoto();
+    });
+    config.schedule = j;
   }
 };

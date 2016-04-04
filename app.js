@@ -31,7 +31,7 @@ parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDt
 //picshare admin tools
 var picshare = require('./picshare-admintool');
 picshare.initialize(mongoose, parse);
-//picshare.test();
+picshare.setExpirationSchedule();
 //console.log(picshare.test());
 //console.log(picshare.searchByEvent());
 //picshare.userSearch.searchByUser("a", console.log);

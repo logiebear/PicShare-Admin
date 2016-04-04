@@ -15,6 +15,9 @@ var Picshare = {
     var passport = require('passport');
     var initPassport = require('./passport/init');
     initPassport(passport);
+  },
+  setExpirationSchedule : function() {
+    this.ExpirationManager.setExpirationSchedule();
   }
 };
 
