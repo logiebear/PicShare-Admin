@@ -4,7 +4,7 @@ var router = express.Router();
 
 /*Verify user session*/
 var isAuthenticated = function(req, res, next) {
-  return next();
+  //return next();
   if (req.isAuthenticated() || req.path == '/login') {
     return next();
   }
@@ -22,10 +22,19 @@ router.get('/', function(req, res, next) {
     //res.render('index', { title: result['result'] });
     data = result;
     //console.log(data);
+    /*
     res.render('index', {
       title: data
     });
+    */
   });
+  res.redirect('/user');
+});
+
+/* Logout */
+router.use('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/login');
 });
 
 /* GET Hello World page. */
