@@ -27,6 +27,16 @@ router.get('/exp', function(req, res, next) {
     em.runAllExpirationPhoto();
     em.setExpirationPeriodByDay(1);
     res.send("Test");
-})
+});
+
+router.get('/searchEvent', function(req, res, next) {
+  var pic = req.picshare.eventSearch;
+  console.log("Start search event");
+  pic.searchByEvent("a", function(result) {
+    console.log("Search Event Reuslt");
+    console.log(result);
+    res.send(result);
+  });
+});
 
 module.exports = router;
