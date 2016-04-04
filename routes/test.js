@@ -60,13 +60,21 @@ router.get('/getEvents', function(req, res,next){
 });
 
 router.get('/deletePhoto', function(req, res,next){
-    var pic = req.picshare.delete
+    var pic = req.picshare.DeleteManager
     console.log("Delete Photo");
-    pic.deletePhoto(function(result){
+    console.log(pic);
+    console.log(pic.deletePhoto);
+
+    pic.deletePhoto("OQqYTYfdtx", {
+      success: function(){
       console.log("Photo Deleted");
       //console.log(result);
-      //res.send(result);
-    });
+      res.send("Photo delete");
+    },
+      error: function(err) {
+        res.send(err);
+      }})
+  ;
 });
 
 module.exports = router;
