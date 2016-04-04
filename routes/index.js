@@ -22,10 +22,13 @@ router.get('/', function(req, res, next) {
     //res.render('index', { title: result['result'] });
     data = result;
     //console.log(data);
+    /*
     res.render('index', {
       title: data
     });
+    */
   });
+  res.redirect('/user');
 });
 
 /* Logout */
