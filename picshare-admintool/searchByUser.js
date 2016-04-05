@@ -6,7 +6,7 @@ var userSearch = {
         var parse = _CoreManager.getParse();
 
         // Build the query
-        var User = parse.Object.extend("User");
+        var User = parse.User.extend();
         var userQuery = new parse.Query(User);
         userQuery.startsWith("username", user);
 
@@ -18,7 +18,7 @@ var userSearch = {
                 var userlist = [];
                 for (var i = 0; i < results.length; i++) {
                     var user = {
-                        "username":     results[i].get("username")
+                        "username":     results[i].getUsername()
                     };
                     userlist.push(user);
                 }
@@ -36,7 +36,7 @@ var userSearch = {
         var parse = _CoreManager.getParse();
 
         // Build the user portion of the query
-        var User = parse.Object.extend("User");
+        var User = parse.User.extend();
         var userQuery = new parse.Query(User);
         userQuery.equalTo("username", user);
 
@@ -63,7 +63,7 @@ var userSearch = {
                     var hashtag = "Location photo";
                     if(results[i].get("event")) {
                         hashtag = results[i].get("event").get("hashtag");
-                    } 
+                    }
                     var photo = {
                         "objectID":     results[i].id,
                         "description":  results[i].get("descriptiveText"),
@@ -90,7 +90,7 @@ var userSearch = {
         var parse = _CoreManager.getParse();
 
         // Build the query
-        var User = parse.Object.extend("User");
+        var User = parse.User.extend();
         var userQuery = new parse.Query(User);
 
         // Perform the query
