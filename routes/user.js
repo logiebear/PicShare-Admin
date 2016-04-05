@@ -5,7 +5,7 @@ var router = express.Router();
 /* GET Hello World page. */
 router.get('/', function(req, res) {
 	var data = {
-		username: "Harry Potter",
+		username: req.user.username || "Harry Potter",
 		users: [],
 		photos: []
 	};
