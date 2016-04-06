@@ -1,8 +1,20 @@
 var deleteList = [];
+var lastOwner = "";
 
 function select(item){
+	for(var i = 0; i < deleteList.length; ++i) {
+		if(deleteList[i] == item){
+			document.getElementById(deleteList[i]).className = "portfolio-item";
+			deleteList.splice(i, 1);
+			if(deleteList.length == 0){
+				document.getElementById("deleteBlock").style.display = "none";
+			}
+			return;
+		}
+	}
 	document.getElementById(item).className = "blur";
 	deleteList.push(item);
+	document.getElementById("deleteBlock").style.display = "block";
 }
 
 function cancel(){
@@ -10,6 +22,7 @@ function cancel(){
 		document.getElementById(deleteList[i]).className = "portfolio-item";
 	}
 	deleteList.length = 0;
+	document.getElementById("deleteBlock").style.display = "none";
 }
 
 function photoDelete(photoId){
@@ -20,9 +33,7 @@ function photoDelete(photoId){
 function objectDelete(postData) {
 	$.post( "/delete", postData, function( data ) {
   		if(data.result == "success") {
-  				console.log("success");
-  		} else {
-
+  			console.log("success");
   		}
 	}, "json");
 }
@@ -32,6 +43,8 @@ function picDelete() {
 		photoDelete(deleteList[i]);
 	}
 	document.getElementById("confirmBlock").style.display = "none";
+	document.getElementById("deleteBlock").style.display = "none";
+	//getPhotos(lastOwner);
 }
 
 function notDelete(){
