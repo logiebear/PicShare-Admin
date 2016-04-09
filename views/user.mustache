@@ -19,6 +19,12 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 
 	<script>
+		$(document).keydown(function(event){ 
+		    if(event.keyCode == 13){ 
+		        searchByUser();
+		    }
+		});
+
 		function showAllUsers() {
 			$.ajax({
 				url: "/user/getAllUsers",
@@ -85,6 +91,17 @@
 				url: "/user/fetchUserPhotos",
 				data: {user: username},
 				success: function(data) {
+					var data_user = {"users":[]};
+					data_user.users.push({
+						"username": username
+					});
+					$.get("/templates/userTmpl.html", function (template) {
+						var tmpl_user = template;
+						var html_user = Mustache.to_html(tmpl_user, data_user);
+						var userList = document.getElementById("userList");
+						userList.innerHTML = html_user;
+					});
+
 					var data_photo = {"photos":[]};
 					for(var i = 0; i < data.length; ++i) {
 						data_photo.photos.push({
@@ -102,19 +119,9 @@
 						var photoList = document.getElementById("photoList");
 						photoList.innerHTML = html_photo;
 					});
-
-					var data_user = {"users":[]};
-					data_user.users.push({
-						"username": username
-					});
-					$.get("/templates/userTmpl.html", function (template) {
-						var tmpl_user = template;
-						var html_user = Mustache.to_html(tmpl_user, data_user);
-						var userList = document.getElementById("userList");
-						userList.innerHTML = html_user;
-					});
 			  	}
 			});
+			lastOwner = username;
 		}
 	</script>
 </head>
@@ -125,7 +132,7 @@
 		<span class = "confirmYes" onclick = "picDelete()"><a style="color: red">Yes</a></span>
 		<span class = "confirmNo" onclick = "notDelete()"><a style="color: #33CC33">No</a></span>
 	</div>
-	<div class="changePattern">
+	<div class="changePattern" id = "deleteBlock">
 		<span class="delete" onclick = "deleteConfirm()"><a style="color: white">Delete</a></span>
 		<span class="cancel" onclick = "cancel()"><a style="color: white">Cancel</a></span>
 	</div>
@@ -193,7 +200,7 @@
 					<input type="text" class="simple_input" id="searchTerm"/>
 				</div>
 				<div class="g_12">
-					<div class="widget_header">
+					<div class="widget_header" style="cursor:pointer" onclick = "showAllUsers()">
 						<h4 class="widget_header_title wwIcon i_16_tabs">List of Users</h4>
 					</div>
 					<div class="widget_contents noPadding" id="userList">
