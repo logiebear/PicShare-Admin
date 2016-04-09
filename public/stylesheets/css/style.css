@@ -2358,12 +2358,13 @@
 /* Change Pattern -- For Demonstration only */
 
 	.changePattern {
+		display: none;
 		width: 2in;
 		height: auto;
 		border-radius: 0 3px 3px 0;
 		background-color: rgba(100, 100, 100, 0.1);
 		position: fixed;
-		top: 400px;
+		top: 460px;
 		left: 0in;
 		padding-top: 6px;
 		z-index: 1000;
@@ -2387,7 +2388,7 @@
 		border-radius: 0 3px 3px 0;
 		background-color: rgba(100, 100, 100, 0.1);
 		position: fixed;
-		top: 340px;
+		top: 400px;
 		left: 0in;
 		padding-top: 6px;
 		z-index: 1000;
