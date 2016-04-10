@@ -19,6 +19,8 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 
 	<script>
+        var currUser;
+        
 		$(document).keydown(function(event){ 
 		    if(event.keyCode == 13){ 
 		        searchByUser();
@@ -26,6 +28,8 @@
 		});
 
 		function showAllUsers() {
+            var loadingMsg = "<p align='center'>Loading. Please wait</p>";
+            document.getElementById("userList").innerHTML = loadingMsg;
 			$.ajax({
 				url: "/user/getAllUsers",
 				success: function (data) {
@@ -58,6 +62,8 @@
 			if(searchTerm == ""){
 				return;
 			}
+            var loadingMsg = "<p align='center'>Loading. Please wait</p>";
+            document.getElementById("userList").innerHTML = loadingMsg;
 			$.ajax({
 				url: "/user/searchByUser",
 				data: {search: searchTerm},
@@ -87,6 +93,7 @@
 		}
 
 		function getPhotos(username) {
+            currUser = username;
 			$.ajax({
 				url: "/user/fetchUserPhotos",
 				data: {user: username},
