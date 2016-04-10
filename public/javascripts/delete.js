@@ -1,5 +1,22 @@
 var deleteList = [];
-var lastOwner = "";
+var deleteNum = 0
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+function loadImage(img, imageSrc) {
+    var downloadingImage = new Image();
+    downloadingImage.onload = function(){
+        img.src = this.src;   
+    };
+    downloadingImage.src = imageSrc;
+}
 
 function select(item){
 	for(var i = 0; i < deleteList.length; ++i) {
@@ -33,18 +50,25 @@ function photoDelete(photoId){
 function objectDelete(postData) {
 	$.post( "/delete", postData, function( data ) {
   		if(data.result == "success") {
+            deleteNum++;
+            if(deleteNum == deleteList.length) {
+                if(typeof currEvent !== 'undefined') getPhotos(currEvent);
+                else getPhotos(currUser);
+            }
   			console.log("success");
   		}
 	}, "json");
 }
 
 function picDelete() {
+    var loadingMsg = "<p align='center'>Refreshing. Please wait</p>";
+    document.getElementById("photoList").innerHTML = loadingMsg;
 	for(var i = 0; i < deleteList.length; ++i) {
 		photoDelete(deleteList[i]);
 	}
 	document.getElementById("confirmBlock").style.display = "none";
 	document.getElementById("deleteBlock").style.display = "none";
-	//getPhotos(lastOwner);
+    
 }
 
 function notDelete(){

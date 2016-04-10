@@ -19,13 +19,18 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 
 	<script>
+        var currEvent;
+        
 		$(document).keydown(function(event){ 
 		    if(event.keyCode == 13){ 
 		        searchByEvent();
 		    }
 		});
+        
 
 		function showAllEvents() {
+            var loadingMsg = "<p align='center'>Loading. Please wait</p>";
+            document.getElementById("eventList").innerHTML = loadingMsg;
 			$.ajax({
 				url: "/event/getAllEvents",
 				success: function (data) {
@@ -58,6 +63,8 @@
 			if(searchTerm == ""){
 				return;
 			}
+            var loadingMsg = "<p align='center'>Loading. Please wait</p>";
+            document.getElementById("eventList").innerHTML = loadingMsg;
 			$.ajax({
 				url: "/event/searchByEvent",
 				data: {search: searchTerm},
@@ -87,6 +94,7 @@
 		}
 
 		function getPhotos(hashtag) {
+            currEvent = hashtag;
 			$.ajax({
 				url: "/event/fetchEventPhotos",
 				data: {event: hashtag},
