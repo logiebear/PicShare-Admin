@@ -25,7 +25,8 @@
 		    }
 		});
 
-		function showAllUsers() {
+		function showAllUsers(elem) {
+			document.getElementById("searchTerm").value = "";
 			$.ajax({
 				url: "/user/getAllUsers",
 				success: function (data) {
@@ -51,6 +52,12 @@
 					});
 			  	}
 			});
+			$(elem).attr("onclick", "collapse(this)");
+		}
+		
+		function collapse(elem) {
+			$("#userList").html("");
+			$(elem).attr("onclick", "showAllUsers(this)");
 		}
 
 		function searchByUser() {
@@ -146,9 +153,22 @@
 			<div class="top_links">
 				<ul>
 					<li>
-						<a href="/logout" title="Logout">
+						<a title="Logout" style="cursor:pointer" onclick = "logout()">
 							<span class="label">Logout</span>
 						</a>
+						<!-- Drop Menu -->
+						<ul class="drop_menu menu_with_icons right_direction" id = "logoutButton">
+							<li>
+								<a class="i_16_checked" style="cursor:pointer" href="/logout">
+									<span class="label">Logout</span>
+								</a>									
+							</li>
+							<li>
+								<a class="i_16_close" style="cursor:pointer" onclick = "logout()">
+									<span class="label">Cancel</span>
+								</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</div>
@@ -191,7 +211,7 @@
 					<div><span class="label">Delete photos by user</span></div>
 				</div>
 				<div class="g_6 contents_options">
-					<div class="simple_buttons" onclick = "showAllUsers()">
+					<div class="simple_buttons" onclick = "showAllUsers(this)">
 						<div>Show All</div>
 					</div>
 					<div class="simple_buttons" onclick = "searchByUser()">
@@ -200,7 +220,7 @@
 					<input type="text" class="simple_input" id="searchTerm"/>
 				</div>
 				<div class="g_12">
-					<div class="widget_header" style="cursor:pointer" onclick = "showAllUsers()">
+					<div class="widget_header" style="cursor:pointer" onclick = "showAllUsers(this)">
 						<h4 class="widget_header_title wwIcon i_16_tabs">List of Users</h4>
 					</div>
 					<div class="widget_contents noPadding" id="userList">

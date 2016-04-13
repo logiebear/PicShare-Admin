@@ -25,7 +25,8 @@
 		    }
 		});
 
-		function showAllEvents() {
+		function showAllEvents(elem) {
+			document.getElementById("searchTerm").value = "";
 			$.ajax({
 				url: "/event/getAllEvents",
 				success: function (data) {
@@ -51,6 +52,12 @@
 					});
 			  	}
 			});
+			$(elem).attr("onclick", "collapse(this)");
+		}
+
+		function collapse(elem) {
+			$("#eventList").html("");
+			$(elem).attr("onclick", "showAllEvents(this)");
 		}
 
 		function searchByEvent() {
@@ -145,9 +152,22 @@
 			<div class="top_links">
 				<ul>
 					<li>
-						<a href="/logout" title="Logout">
+						<a title="Logout" style="cursor:pointer" onclick = "logout()">
 							<span class="label">Logout</span>
 						</a>
+						<!-- Drop Menu -->
+						<ul class="drop_menu menu_with_icons right_direction" id = "logoutButton">
+							<li>
+								<a class="i_16_checked" style="cursor:pointer" href="/logout">
+									<span class="label">Logout</span>
+								</a>									
+							</li>
+							<li>
+								<a class="i_16_close" style="cursor:pointer" onclick = "logout()">
+									<span class="label">Cancel</span>
+								</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</div>
@@ -190,7 +210,7 @@
 					<div><span class="label">Delete photos by event</span></div>
 				</div>
 				<div class="g_6 contents_options">
-					<div class="simple_buttons" onclick = "showAllEvents()">
+					<div class="simple_buttons" onclick = "showAllEvents(this)">
 						<div>Show All</div>
 					</div>
 					<div class="simple_buttons" onclick = "searchByEvent()">
@@ -199,7 +219,7 @@
 					<input type="text" class="simple_input" id="searchTerm"/>
 				</div>
 				<div class="g_12">
-					<div class="widget_header" style="cursor:pointer" onclick = "showAllEvents()">
+					<div class="widget_header" style="cursor:pointer" onclick = "showAllEvents(this)">
 						<h4 class="widget_header_title wwIcon i_16_tabs">List of Events</h4>
 					</div>
 					<div class="widget_contents noPadding" id="eventList">

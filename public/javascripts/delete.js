@@ -54,3 +54,11 @@ function notDelete(){
 function deleteConfirm(){
 	document.getElementById("confirmBlock").style.display = "block";
 }
+
+function logout(){
+	if(document.getElementById("logoutButton").style.display == "block"){
+		document.getElementById("logoutButton").style.display = "none";
+	}else{
+		document.getElementById("logoutButton").style.display = "block";
+	}
+}
