@@ -19,14 +19,18 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 
 	<script>
-		$(document).keydown(function(event){ 
-		    if(event.keyCode == 13){ 
+        var currEvent;
+
+		$(document).keydown(function(event){
+		    if(event.keyCode == 13){
 		        searchByEvent();
 		    }
 		});
 
-		function showAllEvents(elem) {
-			document.getElementById("searchTerm").value = "";
+
+		function showAllEvents() {
+            var loadingMsg = "<p align='center'>Loading. Please wait</p>";
+            document.getElementById("eventList").innerHTML = loadingMsg;
 			$.ajax({
 				url: "/event/getAllEvents",
 				success: function (data) {
@@ -65,6 +69,8 @@
 			if(searchTerm == ""){
 				return;
 			}
+            var loadingMsg = "<p align='center'>Loading. Please wait</p>";
+            document.getElementById("eventList").innerHTML = loadingMsg;
 			$.ajax({
 				url: "/event/searchByEvent",
 				data: {search: searchTerm},
@@ -94,6 +100,7 @@
 		}
 
 		function getPhotos(hashtag) {
+            currEvent = hashtag;
 			$.ajax({
 				url: "/event/fetchEventPhotos",
 				data: {event: hashtag},
@@ -142,7 +149,7 @@
 		<span class="delete" onclick = "deleteConfirm()"><a style="color: white">Delete</a></span>
 		<span class="cancel" onclick = "cancel()"><a style="color: white">Cancel</a></span>
 	</div>
-	
+
 	<div class="top_panel">
 		<div class="wrapper">
 			<div class="user">
@@ -160,7 +167,7 @@
 							<li>
 								<a class="i_16_checked" style="cursor:pointer" href="/logout">
 									<span class="label">Logout</span>
-								</a>									
+								</a>
 							</li>
 							<li>
 								<a class="i_16_close" style="cursor:pointer" onclick = "logout()">
@@ -173,7 +180,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<header class="main_header">
 		<div class="wrapper">
 			<div class="logo">
@@ -185,7 +192,7 @@
 	</header>
 
 	<div class="wrapper contents_wrapper">
-		
+
 		<aside class="sidebar">
 			<ul class="tab_nav">
 				<li class="i_32_ui">
@@ -234,10 +241,10 @@
 						<div class="main-container">
 							<div class="portfolio-content">
 								<div class="portfolio-page" id="photoList">
-									<!--  photo list here  -->	
-								</div> 
+									<!--  photo list here  -->
+								</div>
 							</div>
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>
