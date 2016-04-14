@@ -37,6 +37,19 @@ router.use('/logout', function(req, res) {
   res.redirect('/login');
 });
 
+/* Edit Profile */
+router.post('/edit', passport.authenticate('edit', {
+  successRedirect: '/',
+  failureRedirect: '/edit',
+  failureFlash : true
+}));
+
+router.get('/edit', function(req, res, next) {
+  res.render('edit', {
+    username: req.user.username || "Harry Potter",
+  });
+});
+
 /* GET Hello World page. */
 router.get('/helloworld', function(req, res, next) {
   res.render('helloworld', {

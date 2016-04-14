@@ -1,5 +1,6 @@
 var login = require('./login');
 var signup = require('./signup');
+var edit = require('./edit');
 var adminUser = require('../models/adminUser');
 
 
@@ -13,6 +14,7 @@ module.exports = function(passport){
             done(err, user);
         });
     });
+    edit(passport);
     login(passport);
     //signup(passport);
 }

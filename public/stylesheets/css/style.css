@@ -2363,6 +2363,12 @@
 		margin-top: 120px;
 	}
 
+	.edit {
+		margin: 0 auto;
+		width: 360px;
+		margin-top: 70px;
+	}
+	
 /* Change Pattern -- For Demonstration only */
 
 	.changePattern {
