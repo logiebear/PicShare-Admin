@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<<<<<<< HEAD
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8" />
@@ -60,6 +61,12 @@
                     document.getElementById("userList").innerHTML = "<p align='center'>No Internet Connection</p>";
                 }
 			});
+		    $(elem).attr("onclick", "collapse(this)");
+		}
+
+		function collapse(elem) {
+			$("#userList").html("");
+			$(elem).attr("onclick", "showAllUsers(this)");
 		}
 
 		function searchByUser() {
@@ -254,6 +261,4 @@
 			</span>
 		</div>
 	</footer>
-
-</body>
 </html>

@@ -102,3 +102,11 @@ function checkPos() {
     for (topPos1 = 0; el != null; topPos1 += el.offsetTop, el = el.offsetParent);
     return topPos1;
 }
+
+function logout(){
+	if(document.getElementById("logoutButton").style.display == "block"){
+		document.getElementById("logoutButton").style.display = "none";
+	}else{
+		document.getElementById("logoutButton").style.display = "block";
+	}
+}

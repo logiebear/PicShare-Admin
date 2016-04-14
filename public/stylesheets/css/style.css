@@ -461,8 +461,8 @@
 	}
 
 	.menu_with_icons > li > a {
-		padding: 0 10px 0 40px;
-		width: 90px;
+		padding: 0 0 0 40px;
+		width: 55px;
 	}
 
 	.menu_without_icons > li > a{
@@ -951,6 +951,14 @@
 	
 	.i_22_pages {
 		background: url("../../images/Icons/22/i_22_pages.png") no-repeat scroll transparent;
+	}
+
+	.i_16_checked {
+		background: url("../../images/Icons/16/i_16_checked.png") no-repeat scroll transparent;
+	}
+
+	.i_16_close {
+		background: url("../../images/Icons/16/i_16_close.png") no-repeat scroll transparent;
 	}
 
 	.i_16_ui {

@@ -20,13 +20,13 @@
 
 	<script>
         var currEvent;
-        
-		$(document).keydown(function(event){ 
-		    if(event.keyCode == 13){ 
+
+		$(document).keydown(function(event){
+		    if(event.keyCode == 13){
 		        searchByEvent();
 		    }
 		});
-        
+
 
 		function showAllEvents() {
             var loadingMsg = "<p align='center'>Loading. Please wait</p>";
@@ -61,6 +61,12 @@
                     document.getElementById("eventList").innerHTML = "<p align='center'>No Internet Connection</p>";
                 }
 			});
+			$(elem).attr("onclick", "collapse(this)");
+		}
+
+		function collapse(elem) {
+			$("#eventList").html("");
+			$(elem).attr("onclick", "showAllEvents(this)");
 		}
 
 		function searchByEvent() {
@@ -148,6 +154,7 @@
 	</script>
 </head>
 
+<<<<<<< HEAD
 <body onscroll="detectScroll()">
 	<div class="top_panel">
 		<div class="wrapper">
@@ -158,15 +165,28 @@
 			<div class="top_links">
 				<ul>
 					<li>
-						<a href="/logout" title="Logout">
+						<a title="Logout" style="cursor:pointer" onclick = "logout()">
 							<span class="label">Logout</span>
 						</a>
+						<!-- Drop Menu -->
+						<ul class="drop_menu menu_with_icons right_direction" id = "logoutButton">
+							<li>
+								<a class="i_16_checked" style="cursor:pointer" href="/logout">
+									<span class="label">Logout</span>
+								</a>
+							</li>
+							<li>
+								<a class="i_16_close" style="cursor:pointer" onclick = "logout()">
+									<span class="label">Cancel</span>
+								</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	
+
 	<header class="main_header">
 		<div class="wrapper">
 			<div class="logo">
@@ -178,7 +198,7 @@
 	</header>
 
 	<div class="wrapper contents_wrapper">
-		
+
 		<aside class="sidebar">
 			<ul class="tab_nav">
 				<li class="i_32_ui">
@@ -203,7 +223,7 @@
 					<div><span class="label">Delete photos by event</span></div>
 				</div>
 				<div class="g_6 contents_options">
-					<div class="simple_buttons" onclick = "showAllEvents()">
+					<div class="simple_buttons" onclick = "showAllEvents(this)">
 						<div>Show All</div>
 					</div>
 					<div class="simple_buttons" onclick = "searchByEvent()">
@@ -212,7 +232,7 @@
 					<input type="text" class="simple_input" id="searchTerm"/>
 				</div>
 				<div class="g_12">
-					<div class="widget_header" style="cursor:pointer" onclick = "showAllEvents()">
+					<div class="widget_header" style="cursor:pointer" onclick = "showAllEvents(this)">
 						<h4 class="widget_header_title wwIcon i_16_tabs">List of Events</h4>
 					</div>
 					<div class="widget_contents noPadding" id="eventList">
@@ -238,10 +258,10 @@
 						<div class="main-container">
 							<div class="portfolio-content">
 								<div class="portfolio-page" id="photoList">
-									<!--  photo list here  -->	
-								</div> 
+									<!--  photo list here  -->
+								</div>
 							</div>
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>
