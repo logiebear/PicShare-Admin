@@ -1,5 +1,6 @@
 var deleteList = [];
-var deleteNum = 0
+var deleteNum = 0;
+var topPos = 0;
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -40,6 +41,7 @@ function cancel(){
 	}
 	deleteList.length = 0;
 	document.getElementById("deleteBlock").style.display = "none";
+    document.getElementById("confirmBlock").style.display = "none";
 }
 
 function photoDelete(photoId){
@@ -57,6 +59,7 @@ function objectDelete(postData) {
             }
   			console.log("success");
   		}
+        else document.getElementById("photoList").innerHTML = "<p align='center'>No Internet Connection</p>";
 	}, "json");
 }
 
@@ -77,6 +80,27 @@ function notDelete(){
 
 function deleteConfirm(){
 	document.getElementById("confirmBlock").style.display = "block";
+}
+
+function detectScroll() {
+    if(topPos == 0) topPos = checkPos();
+    var headerBar = document.getElementById("listHeaderBarInner");
+    if(window.pageYOffset >  topPos) {
+        headerBar.style.top = (window.pageYOffset - topPos - 10) + "px";
+        headerBar.classList.add("scrollDownPos");
+    }
+    else {
+        headerBar.style.top = 0;
+        headerBar.classList.remove("scrollDownPos");
+    }
+}
+
+function checkPos() {
+    var headerBar = document.getElementById("listHeaderBar");
+    var topPos1 = 0;
+    var el = headerBar;
+    for (topPos1 = 0; el != null; topPos1 += el.offsetTop, el = el.offsetParent);
+    return topPos1;
 }
 
 function logout(){
