@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PicShare Administrator</title>
+	<link rel="icon" href="images/Icons/favicon.png" type="image/x-icon">
+
+	<!-- The Fonts -->
+	<link href="http://fonts.useso.com/css?family=Oswald|Droid+Sans:400,700" rel="stylesheet">
+	<!-- The Main CSS File -->
+	<!--
+	<link rel="stylesheet" href="stylesheets/css/style.css">
+	-->
+	<link rel="stylesheet" href="CSS/style.css">
+	<script>
+		function showConfirm(){
+			document.getElementById("editConfirm").style.display = "block";
+		}
+
+		function hideConfirm(){
+			document.getElementById("editConfirm").style.display = "none";
+		}
+	</script>
+</head>
+<body>
+	<!-- Top Panel -->
+	<div class="top_panel">
+		<div class="wrapper">
+			<div class="user">
+				<img src="images/Icons/user_avatar.png" alt="user_avatar" class="user_avatar" />
+				<span class="label" id="username">{{username}}</span>
+			</div>
+			<div class="top_links">
+				<ul>
+					<li>
+						<a title="Back" style="cursor:pointer" href="/user">
+							<span class="label">Back</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="wrapper contents_wrapper">
+		<div class="edit">
+			<div class="widget_header">
+				<h4 class="widget_header_title wwIcon i_16_login">Edit</h4>
+			</div>
+			<div class="widget_contents lgNoPadding">
+				<form action="/confirm" method="post">
+					<div class="line_grid">
+						<div class="g_3 g_3M"><span class="label">Current Password</span></div>
+						<div class="g_9 g_9M">
+							<input class="simple_field tooltip" title="Current Password" type="password" name="cur_password" required>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="line_grid">
+						<div class="g_3 g_3M"><span class="label">New Username</span></div>
+						<div class="g_9 g_9M">
+							<input class="simple_field tooltip" title="New Username" type="text" placeholder="Username doesn't change if empty" name="new_username"></div>
+						<div class="clear"></div>
+					</div>
+					<div class="line_grid">
+						<div class="g_3 g_3M"><span class="label">New Password</span></div>
+						<div class="g_9 g_9M">
+							<input class="simple_field tooltip" title="New Password" type="password" name="new_password" required>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="line_grid">
+						<div class="g_3 g_3M"><span class="label">Confirm Password</span></div>
+						<div class="g_9 g_9M">
+							<input class="simple_field tooltip" title="Confirm Password" type="password" name="cfm_password" required>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="line_grid">
+						<div class="g_4" onclick="showConfirm()">
+							<input class="submitIt simple_buttons" value="Submit" type="button">
+						</div>
+						<div style="display:none" id="editConfirm">
+							<div class="g_4">
+								<input class="submitIt simple_buttons" style="color:red" value="Confirm" type="submit">
+							</div>
+							<div class="g_4">
+								<input class="submitIt simple_buttons" style="color:green" value="Cancel"  type="button" onclick="hideConfirm()">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
