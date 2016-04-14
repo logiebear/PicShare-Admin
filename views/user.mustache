@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-<<<<<<< HEAD
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8" />
@@ -28,7 +27,7 @@
 		    }
 		});
 
-		function showAllUsers() {
+		function showAllUsers(elem) {
             var loadingMsg = "<p align='center'>Loading. Please wait</p>";
             document.getElementById("userList").innerHTML = loadingMsg;
 			$.ajax({
@@ -210,7 +209,7 @@
 					<div><span class="label">Delete photos by user</span></div>
 				</div>
 				<div class="g_6 contents_options">
-					<div class="simple_buttons" onclick = "showAllUsers()">
+					<div class="simple_buttons" onclick = "showAllUsers(this)">
 						<div>Show All</div>
 					</div>
 					<div class="simple_buttons" onclick = "searchByUser()">
@@ -219,7 +218,7 @@
 					<input type="text" class="simple_input" id="searchTerm"/>
 				</div>
 				<div class="g_12">
-					<div class="widget_header" style="cursor:pointer" onclick = "showAllUsers()">
+					<div class="widget_header" style="cursor:pointer" onclick = "showAllUsers(this)">
 						<h4 class="widget_header_title wwIcon i_16_tabs">List of Users</h4>
 					</div>
 					<div class="widget_contents noPadding" id="userList">
@@ -261,4 +260,5 @@
 			</span>
 		</div>
 	</footer>
+</body>
 </html>
