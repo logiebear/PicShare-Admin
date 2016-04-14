@@ -12,7 +12,7 @@
 	<!--
 	<link rel="stylesheet" href="stylesheets/css/style.css">
 	-->
-	<link rel="stylesheet" href="CSS/style.css">
+	<link rel="stylesheet" href="stylesheets/css/style.css">
 	<script>
 		function showConfirm(){
 			document.getElementById("editConfirm").style.display = "block";
@@ -23,6 +23,7 @@
 		}
 	</script>
 </head>
+
 <body>
 	<!-- Top Panel -->
 	<div class="top_panel">
@@ -49,7 +50,13 @@
 				<h4 class="widget_header_title wwIcon i_16_login">Edit</h4>
 			</div>
 			<div class="widget_contents lgNoPadding">
-				<form action="/confirm" method="post">
+				<form action="/edit" method="post">
+					<div class="line_grid">
+						<div class="g_3 g_3M"><span class="label">Current Username</span></div>
+						<div class="g_9 g_9M">
+							<input class="simple_field tooltip" title="Current Username" type="text" value="{{username}}" name="username" disabled></div>
+						<div class="clear"></div>
+					</div>
 					<div class="line_grid">
 						<div class="g_3 g_3M"><span class="label">Current Password</span></div>
 						<div class="g_9 g_9M">
@@ -66,7 +73,7 @@
 					<div class="line_grid">
 						<div class="g_3 g_3M"><span class="label">New Password</span></div>
 						<div class="g_9 g_9M">
-							<input class="simple_field tooltip" title="New Password" type="password" name="new_password" required>
+							<input class="simple_field tooltip" title="New Password" type="password" name="password" required>
 						</div>
 						<div class="clear"></div>
 					</div>

@@ -44,6 +44,12 @@ router.post('/edit', passport.authenticate('edit', {
   failureFlash : true
 }));
 
+router.get('/edit', function(req, res, next) {
+  res.render('edit', {
+    username: req.user.username || "Harry Potter",
+  });
+});
+
 /* GET Hello World page. */
 router.get('/helloworld', function(req, res, next) {
   res.render('helloworld', {
