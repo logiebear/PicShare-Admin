@@ -21,6 +21,15 @@
 		function hideConfirm(){
 			document.getElementById("editConfirm").style.display = "none";
 		}
+
+		function validateForm(){
+			var pwd = document.forms["newProfile"]["password"].value;
+			var pwdAgain = document.forms["newProfile"]["cfm_password"].value;
+			if (pwd != pwdAgain) {
+		        alert("Password mismatch");
+		        return false;
+		    }
+		}
 	</script>
 </head>
 
@@ -50,7 +59,7 @@
 				<h4 class="widget_header_title wwIcon i_16_login">Edit</h4>
 			</div>
 			<div class="widget_contents lgNoPadding">
-				<form action="/edit" method="post">
+				<form action="/edit" onsubmit="return validateForm()" method="post" name="newProfile">
 					<div class="line_grid">
 						<div class="g_3 g_3M"><span class="label">Current Username</span></div>
 						<div class="g_9 g_9M">
@@ -62,12 +71,6 @@
 						<div class="g_9 g_9M">
 							<input class="simple_field tooltip" title="Current Password" type="password" name="cur_password" required>
 						</div>
-						<div class="clear"></div>
-					</div>
-					<div class="line_grid">
-						<div class="g_3 g_3M"><span class="label">New Username</span></div>
-						<div class="g_9 g_9M">
-							<input class="simple_field tooltip" title="New Username" type="text" placeholder="Username doesn't change if empty" name="new_username"></div>
 						<div class="clear"></div>
 					</div>
 					<div class="line_grid">
