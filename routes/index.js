@@ -47,6 +47,7 @@ router.post('/edit', passport.authenticate('edit', {
 router.get('/edit', function(req, res, next) {
   res.render('edit', {
     username: req.user.username || "Harry Potter",
+    message: req.flash('message')
   });
 });
 
