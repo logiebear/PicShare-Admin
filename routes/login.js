@@ -1,10 +1,23 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
 
-
-/* GET Hello World page. */
+/*GET login page*/
 router.get('/', function(req, res) {
-    res.render('login', {});
+    res.render('login', {message: req.flash('message')});
+});
+
+/*POST to login page*/
+router.post('/', passport.authenticate('local',
+            { successRedirect: '/user',
+              failureRedirect: '/login',
+              failureFlash: true })
+);
+
+/*Log out*/
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/login');
 });
 
 

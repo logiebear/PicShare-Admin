@@ -4,8 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 var express_session = require('express-session');
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var test = require('./routes/test');
@@ -30,17 +31,10 @@ parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDt
 //picshare admin tools
 var picshare = require('./picshare-admintool');
 picshare.initialize(mongoose, parse);
-//picshare.test();
+picshare.setExpirationSchedule();
 //console.log(picshare.test());
 //console.log(picshare.searchByEvent());
-console.log("List of all users:");
-picshare.userSearch.getAllUsers(console.log);
-console.log("List of usernames starting with \"v\":");
-picshare.userSearch.searchByUser("v", console.log);
-console.log("List of user photos for user \"v\":");
-picshare.userSearch.fetchUserPhotos("v", console.log);
-console.log("List of user photos for user \"vincent\":");
-picshare.userSearch.fetchUserPhotos("vincent", console.log);
+//picshare.userSearch.searchByUser("a", console.log);
 
 var app = express();
 
@@ -60,6 +54,8 @@ app.use(function(req,res,next){
     next();
 });
 
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -67,6 +63,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Set up flash
+app.use(express_session({ secret: process.env.MASTER_KEY || 'keyboard cat' }));
+app.use(flash());
+
+//Passport middleware for user authentication
+app.use(passport.initialize());
+app.use(passport.session());
 
 //routes
 app.use('/', routes);
@@ -104,39 +108,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-//Set up for user authentication
-app.use(bodyParser());
-app.use(cookieParser());
-app.use(express_session({ secret: 'keyboard cat' }));
-
-//Passport middleware for user authentication
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-  done(null, user._id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Username doesn\'t exist.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
 
 module.exports = app;
