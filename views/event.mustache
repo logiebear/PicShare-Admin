@@ -20,13 +20,14 @@
 
 	<script>
         var currEvent;
-
+        /* search when enter is pressed */
 		$(document).keydown(function(event){
 		    if(event.keyCode == 13){
 		        searchByEvent();
 		    }
 		});
 
+		/* AJAX query for fetching event list */
 		function showAllEvents(elem) {
             var loadingMsg = "<p align='center'>Loading. Please wait</p>";
             document.getElementById("eventList").innerHTML = loadingMsg;
@@ -64,11 +65,13 @@
 			$(elem).attr("onclick", "collapse(this)");
 		}
 
+		/* collapse the user list */
 		function collapse(elem) {
 			$("#eventList").html("");
 			$(elem).attr("onclick", "showAllEvents(this)");
 		}
 
+		/* AJAX query for search event */
 		function searchByEvent() {
 			searchTerm = document.getElementById("searchTerm").value;
 			if(searchTerm == ""){
@@ -109,6 +112,7 @@
 			});
 		}
 
+		/* AJAX query for get photos */
 		function getPhotos(hashtag) {
             currEvent = hashtag;
 			$.ajax({
@@ -200,7 +204,7 @@
 	</header>
 
 	<div class="wrapper contents_wrapper">
-
+		<!--  side bar to switch between user and event  -->
 		<aside class="sidebar">
 			<ul class="tab_nav">
 				<li class="i_32_ui">
@@ -217,9 +221,10 @@
 				</li>
 			</ul>
 		</aside>
-
+		<!--  table of content  -->
 		<div class="contents">
 			<div class="grid_wrapper">
+				<!--  list of events  -->
 				<div class="g_6 contents_header">
 					<h3 class="i_16_dashboard tab_label">Photos by event</h3>
 					<div><span class="label">Delete photos by event</span></div>
@@ -239,8 +244,11 @@
 					</div>
 					<div class="widget_contents noPadding" id="eventList">
 						<!--  event list here  -->
+						<!--  import eventTmpl.html here  -->
 					</div>
 				</div>
+				
+				<!--  table of photos  -->
 				<div class="g_12" id="listHeaderBar">
 					<div class="widget_header" id="listHeaderBarInner">
 						<h4 class="widget_header_title wwIcon i_16_tables">Photos in the Event</h4>
@@ -261,6 +269,7 @@
 							<div class="portfolio-content">
 								<div class="portfolio-page" id="photoList">
 									<!--  photo list here  -->
+									<!--  import photoTmpl.html here  -->
 								</div>
 							</div>
 						</div>

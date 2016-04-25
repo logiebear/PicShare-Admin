@@ -21,12 +21,14 @@
 	<script>
         var currUser;
         
+        /* search when enter is pressed */
 		$(document).keydown(function(event){ 
 		    if(event.keyCode == 13){ 
 		        searchByUser();
 		    }
 		});
 
+		/* AJAX query for fetching user list */
 		function showAllUsers(elem) {
             var loadingMsg = "<p align='center'>Loading. Please wait</p>";
             document.getElementById("userList").innerHTML = loadingMsg;
@@ -64,11 +66,13 @@
 		    $(elem).attr("onclick", "collapse(this)");
 		}
 
+		/* collapse the user list */
 		function collapse(elem) {
 			$("#userList").html("");
 			$(elem).attr("onclick", "showAllUsers(this)");
 		}
 
+		/* AJAX query for search user */
 		function searchByUser() {
 			searchTerm = document.getElementById("searchTerm").value;
 			if(searchTerm == ""){
@@ -109,6 +113,7 @@
 			});
 		}
 
+		/* AJAX query for get photos */
 		function getPhotos(username) {
             currUser = username;
 			$.ajax({
@@ -200,7 +205,7 @@
 	</header>
 
 	<div class="wrapper contents_wrapper">
-
+		<!--  side bar to switch between user and event  -->
 		<aside class="sidebar">
 			<ul class="tab_nav">
 				<li class="active_tab i_32_ui">
@@ -217,9 +222,10 @@
 				</li>
 			</ul>
 		</aside>
-
+		<!--  table of content  -->
 		<div class="contents">
 			<div class="grid_wrapper">
+				<!--  list of users  -->
 				<div class="g_6 contents_header">
 					<h3 class="i_16_ui tab_label">Photos by user</h3>
 					<div><span class="label">Delete photos by user</span></div>
@@ -239,8 +245,11 @@
 					</div>
 					<div class="widget_contents noPadding" id="userList">
 						<!--  user list here  -->
+						<!--  import userTmpl.html here  -->
 					</div>
 				</div>
+
+				<!--  table of photos  -->
 				<div class="g_12" id="listHeaderBar">
 					<div class="widget_header" id="listHeaderBarInner">
 						<h4 class="widget_header_title wwIcon i_16_tables">Photos of the User</h4>
@@ -261,6 +270,7 @@
 							<div class="portfolio-content">
 								<div class="portfolio-page" id="photoList">
 									<!--  photo list here  -->
+									<!--  import photoTmpl.html here  -->
 								</div>
 							</div>
 						</div>
