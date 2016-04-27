@@ -7,14 +7,14 @@ router.get('/', function(req, res) {
     res.render('login', {message: req.flash('message')});
 });
 
-/*POST to login page*/
+/*POST login page*/
 router.post('/', passport.authenticate('local',
             { successRedirect: '/user',
               failureRedirect: '/login',
               failureFlash: true })
 );
 
-/*Log out*/
+/*GET Log out*/
 router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/login');

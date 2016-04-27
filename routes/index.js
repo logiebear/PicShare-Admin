@@ -4,29 +4,21 @@ var router = express.Router();
 
 /*Verify user session*/
 var isAuthenticated = function(req, res, next) {
-  //return next();
   if (req.isAuthenticated() || req.path == '/login') {
     return next();
   }
-  //console.log(req);
   res.redirect('/login');
 }
 
+/* Add verification to routing */
 router.use(isAuthenticated);
-/* GET home page. */
+
+/* GET request: home page. */
 router.get('/', function(req, res, next) {
   var data = "Express";
   req.picshare.test();
   req.parse.Cloud.run('hello', {}).then(function(result) {
-    // ratings should be 4.5
-    //res.render('index', { title: result['result'] });
     data = result;
-    //console.log(data);
-    /*
-    res.render('index', {
-      title: data
-    });
-    */
   });
   res.redirect('/user');
 });
@@ -51,6 +43,7 @@ router.get('/helloworld', function(req, res, next) {
   });
 });
 
+/* GET user list page. */
 router.get('/userlist', function(req, res) {
   var db = req.db;
   var collection = db.get('_User');
@@ -63,6 +56,7 @@ router.get('/userlist', function(req, res) {
   });
 });
 
+/* Add all sub view into routes */
 router.use('/test', require('./test.js'));
 router.use('/login', require('./login.js'));
 router.use('/user', require('./user.js'));

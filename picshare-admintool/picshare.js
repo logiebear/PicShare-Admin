@@ -4,6 +4,8 @@ _CoreManager = require('./CoreManager.js');
 //var _CoreManager2 = _interopRequireDefault(_CoreManager);
 
 var Picshare = {
+  // initialize piachare tools
+  // parameter : mongodb database, parse server
   initialize: function initialize(database, parse) {
     Picshare._initialize(database, parse);
   },
@@ -11,20 +13,14 @@ var Picshare = {
   _initialize: function _initialize(database, parse) {
     _CoreManager.setRawDatabase(database);
     _CoreManager.setParse(parse);
-    //console.log(_CoreManager.getParse());
+    // initialize net gate system
     var passport = require('passport');
     var initPassport = require('./passport/init');
     initPassport(passport);
-    /*
-    var signup = require('./passport/signup');
-    signup({username : "admin", password : "admin"});
-    /*
-    signup({username : 'a', passowrd : 'a'});
-    signup({username : 'b', passowrd : 'b'});
-    signup({username : 'c', passowrd : 'c'});
-    */
+
 
   },
+  // Set Expiration time schedule
   setExpirationSchedule : function() {
     this.ExpirationManager.setExpirationSchedule();
   }

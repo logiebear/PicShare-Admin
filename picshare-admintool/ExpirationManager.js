@@ -1,6 +1,9 @@
 var _CoreManager = require('./CoreManager');
 var schedule = require('node-schedule');
 
+// generic expiaration function
+// parameter: class of object need to clear according to expiration time
+// delte all the expired object
 function runAllExpiration(parseObject) {
   //Parse.Cloud.useMasterKey();
   var Parse = _CoreManager.getParse();
@@ -37,22 +40,27 @@ function runAllExpiration(parseObject) {
   });
 }
 
+// initialize expiration time
 var config = {
   ExpirationPeriod: (7 * 24 * 60 * 60 * 1000)
 };
 
 module.exports = {
+  // delete expired photo
   runAllExpirationPhoto: function() {
     console.log("Expire photo");
     runAllExpiration("Photo");
   },
+  // delete expired event
   runAllExpirationEvent: function() {
     console.log("Expire event");
     runAllExpiration("Event");
   },
+  // set expiration time by days
   setExpirationPeriodByDay: function(days) {
     config.ExpirationPeriod = days * 24 * 60 * 60 * 1000;
   },
+  // initialize expiration schedule
   setExpirationSchedule: function() {
     var ExpManager = this;
     var j = schedule.scheduleJob({

@@ -1,5 +1,7 @@
 var _CoreManager = require('./CoreManager.js');
 
+
+// test if picshare route works well
 function test() {
   //console.log("test");
   var parse =  _CoreManager.getParse();
