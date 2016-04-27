@@ -9,10 +9,7 @@
 	<!-- The Fonts -->
 	<link href="http://fonts.useso.com/css?family=Oswald|Droid+Sans:400,700" rel="stylesheet">
 	<!-- The Main CSS File -->
-	<!--
 	<link rel="stylesheet" href="stylesheets/css/style.css">
-	-->
-	<link rel="stylesheet" href="CSS/style.css">
 	<script>
 		function showConfirm(){
 			document.getElementById("editConfirm").style.display = "block";
@@ -21,8 +18,18 @@
 		function hideConfirm(){
 			document.getElementById("editConfirm").style.display = "none";
 		}
+
+		function validateForm(){
+			var pwd = document.forms["newProfile"]["password"].value;
+			var pwdAgain = document.forms["newProfile"]["cfm_password"].value;
+			if (pwd != pwdAgain) {
+		        document.getElementById("errorMsg").innerHTML = "Password mismatch";
+		        return false;
+		    }
+		}
 	</script>
 </head>
+
 <body>
 	<!-- Top Panel -->
 	<div class="top_panel">
@@ -49,7 +56,13 @@
 				<h4 class="widget_header_title wwIcon i_16_login">Edit</h4>
 			</div>
 			<div class="widget_contents lgNoPadding">
-				<form action="/confirm" method="post">
+				<form action="/edit" onsubmit="return validateForm()" method="post" name="newProfile">
+					<div class="line_grid">
+						<div class="g_3 g_3M"><span class="label">Current Username</span></div>
+						<div class="g_9 g_9M">
+							<input class="simple_field tooltip" title="Current Username" type="text" value="{{username}}" name="username"></div>
+						<div class="clear"></div>
+					</div>
 					<div class="line_grid">
 						<div class="g_3 g_3M"><span class="label">Current Password</span></div>
 						<div class="g_9 g_9M">
@@ -58,15 +71,9 @@
 						<div class="clear"></div>
 					</div>
 					<div class="line_grid">
-						<div class="g_3 g_3M"><span class="label">New Username</span></div>
-						<div class="g_9 g_9M">
-							<input class="simple_field tooltip" title="New Username" type="text" placeholder="Username doesn't change if empty" name="new_username"></div>
-						<div class="clear"></div>
-					</div>
-					<div class="line_grid">
 						<div class="g_3 g_3M"><span class="label">New Password</span></div>
 						<div class="g_9 g_9M">
-							<input class="simple_field tooltip" title="New Password" type="password" name="new_password" required>
+							<input class="simple_field tooltip" title="New Password" type="password" name="password" required>
 						</div>
 						<div class="clear"></div>
 					</div>
@@ -90,6 +97,9 @@
 							</div>
 						</div>
 						<div class="clear"></div>
+					</div>
+					<div class="line_grid">
+						<p id="errorMsg" style="text-align:center"> {{message}} </p>
 					</div>
 				</form>
 			</div>

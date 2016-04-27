@@ -1,5 +1,5 @@
 var LocalStrategy   = require('passport-local').Strategy;
-var User = require('../models/user');
+var User = require('../models/adminUser');
 var bCrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport){
@@ -11,8 +11,11 @@ module.exports = function(passport){
         function(req, username, password, done) {
 
             findOrCreateUser = function(){
+                  console.log(req.param("username"));
+                  console.log(req.user.username);
+                      
                 // find a user in Mongo with provided username
-                User.findOne({ 'username' :  username }, function(err, user) {
+                User.findOne({ 'username' :  req.user.username }, function(err, user) {
                     // In case of any error, return using the done method
                     if (err){
                         console.log('Error in Edit Profile: '+err);
@@ -20,6 +23,7 @@ module.exports = function(passport){
                     }
                     // already exists
                     if (user) {
+                      if(!isValidPassword(user, req.param("cur_password"))) return done(null, false, req.flash('message','Invalid Password'));
                       var newUser = user;
 
                       // set the user's local credentials
@@ -37,7 +41,7 @@ module.exports = function(passport){
                               console.log('Error in Saving user: '+err);
                               throw err;
                           }
-                          console.log('User Registration succesful');
+                          console.log('User password modification succesful');
                           return done(null, newUser);
                       });
                     } else {
@@ -57,4 +61,8 @@ module.exports = function(passport){
         return password;
     }
 
+    var isValidPassword = function(user, password) {
+    // return bCrypt.compareSync(password, user.password);
+    return user.password == password;
+  }
 }

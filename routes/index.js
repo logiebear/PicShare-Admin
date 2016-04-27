@@ -19,6 +19,7 @@ router.get('/', function(req, res, next) {
   req.picshare.test();
   req.parse.Cloud.run('hello', {}).then(function(result) {
     data = result;
+
   });
   res.redirect('/user');
 });
@@ -36,6 +37,13 @@ router.post('/edit', passport.authenticate('edit', {
   failureFlash : true
 }));
 
+router.get('/edit', function(req, res, next) {
+  res.render('edit', {
+    username: req.user.username || "Harry Potter",
+    message: req.flash('message')
+  });
+});
+
 /* GET Hello World page. */
 router.get('/helloworld', function(req, res, next) {
   res.render('helloworld', {
@@ -47,9 +55,7 @@ router.get('/helloworld', function(req, res, next) {
 router.get('/userlist', function(req, res) {
   var db = req.db;
   var collection = db.get('_User');
-  console.log(collection);
   collection.find({}, {}, function(e, docs) {
-    //  console.log(docs);
     res.render('userlist', {
       "userlist": docs
     });

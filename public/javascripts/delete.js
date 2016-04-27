@@ -2,13 +2,14 @@ var deleteList = [];
 var deleteNum = 0;
 var topPos = 0;
 
+/**************       functions for loading data: sleep(), loadImage()      **************/
 function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds){
+            break;
+        }
     }
-  }
 }
 
 function loadImage(img, imageSrc) {
@@ -19,6 +20,7 @@ function loadImage(img, imageSrc) {
     downloadingImage.src = imageSrc;
 }
 
+/*************      functions for selecting photos: select(), cancel()     **************/
 function select(item){
 	for(var i = 0; i < deleteList.length; ++i) {
 		if(deleteList[i] == item){
@@ -44,6 +46,7 @@ function cancel(){
     document.getElementById("confirmBlock").style.display = "none";
 }
 
+/****************     functions for delete photos     *******************/
 function photoDelete(photoId){
 	var postData = { photoId : photoId, type : "photo" };
 	objectDelete(postData);
@@ -57,7 +60,6 @@ function objectDelete(postData) {
                 if(typeof currEvent !== 'undefined') getPhotos(currEvent);
                 else getPhotos(currUser);
             }
-  			console.log("success");
   		}
         else document.getElementById("photoList").innerHTML = "<p align='center'>No Internet Connection</p>";
 	}, "json");
@@ -82,6 +84,7 @@ function deleteConfirm(){
 	document.getElementById("confirmBlock").style.display = "block";
 }
 
+/***************        functions for scroll         ****************/
 function detectScroll() {
     if(topPos == 0) topPos = checkPos();
     var headerBar = document.getElementById("listHeaderBarInner");
@@ -103,6 +106,7 @@ function checkPos() {
     return topPos1;
 }
 
+/***************        function for logout        ***************/
 function logout(){
 	if(document.getElementById("logoutButton").style.display == "block"){
 		document.getElementById("logoutButton").style.display = "none";
