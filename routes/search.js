@@ -16,7 +16,6 @@ router.get('/byuser', function(req, res, next) {
             res.send(results);
         },
         error: function(error) {
-            console.log(error);
             res.send("Some kind of error occurred: " + error);
         }
     });
@@ -27,11 +26,9 @@ router.get('/allusers', function(req, res, next) {
     var query = new req.parse.Query(User);
     query.find({
         success: function(results) {
-            console.log(results);
             res.send(results);
         },
         error: function(error) {
-            console.log(error);
             res.send("Some kind of error occurred: " + error);
         }
     });
@@ -42,11 +39,9 @@ router.get('/allphotos', function(req, res, next) {
     var query = new req.parse.Query(Photo);
     query.find({
         success: function(results) {
-            console.log(results);
             res.send(results);
         },
         error: function(error) {
-            console.log(error);
             res.send("Some kind of error occurred: " + error);
         }
     });
@@ -57,11 +52,9 @@ router.get('/allevents', function(req, res, next) {
     var query = new req.parse.Query(Event);
     query.find({
         success: function(results) {
-            console.log(results);
             res.send(results);
         },
         error: function(error) {
-            console.log(error);
             res.send("Some kind of error occurred: " + error);
         }
     });

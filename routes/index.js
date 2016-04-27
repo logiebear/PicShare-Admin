@@ -8,7 +8,6 @@ var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated() || req.path == '/login') {
     return next();
   }
-  //console.log(req);
   res.redirect('/login');
 }
 
@@ -18,15 +17,8 @@ router.get('/', function(req, res, next) {
   var data = "Express";
   req.picshare.test();
   req.parse.Cloud.run('hello', {}).then(function(result) {
-    // ratings should be 4.5
-    //res.render('index', { title: result['result'] });
     data = result;
-    //console.log(data);
-    /*
-    res.render('index', {
-      title: data
-    });
-    */
+
   });
   res.redirect('/user');
 });
@@ -61,9 +53,7 @@ router.get('/helloworld', function(req, res, next) {
 router.get('/userlist', function(req, res) {
   var db = req.db;
   var collection = db.get('_User');
-  console.log(collection);
   collection.find({}, {}, function(e, docs) {
-    //  console.log(docs);
     res.render('userlist', {
       "userlist": docs
     });

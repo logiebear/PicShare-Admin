@@ -32,7 +32,6 @@ router.get('/fetchUserPhotos', function(req, res) {
     	for(var i = 0; i < result.length; ++i) {
     		result[i].image = result[i].image.url();
     	}
-        //console.log(result);
     	res.send(result);
     });
 });
