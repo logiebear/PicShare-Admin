@@ -8,7 +8,6 @@ var eventSearch = {
          // Build the query
          var Event = parse.Object.extend("Event");
          var eventQuery = new parse.Query(Event);
-         // eventQuery.startsWith("hashtag".toLowerCase(), event.toLowerCase());
          eventQuery.matches("hashtag", "("+ event + ")", "i");
 
          // Perform the query

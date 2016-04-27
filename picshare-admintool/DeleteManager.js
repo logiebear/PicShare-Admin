@@ -2,22 +2,11 @@ var _CoreManager = require('./CoreManager.js');
 
 
 var  deleteManager = {
-     // Accepts a event string and a callback function from the caller
+     // Accepts a photo string and a callback function from the caller
      deletePhoto: function myObject(photo, callback) {
 
          var parse = _CoreManager.getParse();
-/*
-         console.log(parse.Promise);
-         parse.Promise.get(photo).destroy({
-          success:function(result){
-            callback.success();
-            // The object was deleted from database
-          },
-          error: function(myObject, error) {
-          // The deletion failed.
-            callback.error(error);
-          }
-        });*/
+
          // Build the query
          var Photo = parse.Object.extend("Photo");
          var photoQuery = new parse.Query(Photo);

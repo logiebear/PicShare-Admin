@@ -8,7 +8,6 @@ var userSearch = {
         // Build the query
         var User = parse.User.extend();
         var userQuery = new parse.Query(User);
-        //userQuery.startsWith("username", user);
         userQuery.matches("username", "("+ user + ")", "i");
 
         // Perform the query
