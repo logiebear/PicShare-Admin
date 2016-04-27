@@ -16,8 +16,6 @@ var test = require('./routes/test');
 // it must be in front of routes code
 // like app.use("/", routes)
 var mongo = require('mongodb');
-//var monk = require('monk');
-//var db = monk('picshare:123456@ds013848.mongolab.com:13848/picshare');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://picshare:123456@ds013848.mongolab.com:13848/picshare');
 
@@ -32,14 +30,12 @@ parse._initialize("QxhPBK9OoKFLvvWK2PKY", "IFG5gB7cn5unrLY12aQM", "Nlddcl8AKGSDt
 var picshare = require('./picshare-admintool');
 picshare.initialize(mongoose, parse);
 picshare.setExpirationSchedule();
-//console.log(picshare.test());
-//console.log(picshare.searchByEvent());
-//picshare.userSearch.searchByUser("a", console.log);
 
 var app = express();
 
 // view engine setup
 var mustacheExpress = require('mustache-express');
+
 // Register '.mustache' extension with The Mustache Express
 app.engine('mustache', mustacheExpress());
 

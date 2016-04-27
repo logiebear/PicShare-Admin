@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
     res.render('user', data);
 });
 
+/* JSON request: show all users info */
 router.get('/getAllUsers', function(req, res) {
 	var userSearch = req.picshare.userSearch;
     userSearch.getAllUsers(function(result) {
@@ -19,6 +20,7 @@ router.get('/getAllUsers', function(req, res) {
     });
 });
 
+/* JSON request: show user info searched by name */
 router.get('/searchByUser', function(req, res) {
 	var userSearch = req.picshare.userSearch;
     userSearch.searchByUser(req.param("search"), function(result) {
@@ -26,6 +28,7 @@ router.get('/searchByUser', function(req, res) {
     });
 });
 
+/* JSON request: show photos accroding to specified user */
 router.get('/fetchUserPhotos', function(req, res) {
 	var userSearch = req.picshare.userSearch;
     userSearch.fetchUserPhotos(req.param("user"), function(result) {

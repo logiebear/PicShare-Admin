@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+/* JSON requset: Delte event or photo */
+/* return success or error */
 router.post('/', function(req, res,next){
     var pic = req.picshare.DeleteManager
 

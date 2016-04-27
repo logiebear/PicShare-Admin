@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-/* GET Hello World page. */
+/* GET request: return event page as index page. */
 router.get('/', function(req, res) {
     var data = {
         username:  req.user.username || "Harry Potter",
@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
     res.render('event', data);
 });
 
+/* GET request: return views showing all events */
 router.get('/getAllEvents', function(req, res) {
     var eventSearch = req.picshare.eventSearch;
     eventSearch.getAllEvents(function(result) {
@@ -19,6 +20,8 @@ router.get('/getAllEvents', function(req, res) {
     });
 });
 
+
+/* GET request: return event search result */
 router.get('/searchByEvent', function(req, res) {
     var eventSearch = req.picshare.eventSearch;
     eventSearch.searchByEvent(req.param("search"), function(result) {
@@ -26,6 +29,7 @@ router.get('/searchByEvent', function(req, res) {
     });
 });
 
+/* GET request: return photo search result fetched according to events */
 router.get('/fetchEventPhotos', function(req, res) {
     var eventSearch = req.picshare.eventSearch;
     eventSearch.fetchEventPhotos(req.param("event"), function(result) {

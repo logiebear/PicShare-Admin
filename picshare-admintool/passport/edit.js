@@ -7,6 +7,7 @@ module.exports = function(passport){
 	passport.use('edit', new LocalStrategy({
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
+				// create a new user, or edit password of an existed user
         function(req, username, password, done) {
 
             findOrCreateUser = function(){
